@@ -1,0 +1,16 @@
+<!-- Illustration par défaut — caméra de cinéma. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E6E3DE"/>
+  <ellipse cx="200" cy="262" rx="140" ry="10" fill="#000" opacity=".08"/>
+  <!-- Bobines -->
+  <g fill="#2B2B2B"><circle cx="150" cy="92" r="46"/><circle cx="246" cy="92" r="46"/></g>
+  <g fill="#E6E3DE"><circle cx="150" cy="92" r="8"/><circle cx="246" cy="92" r="8"/>
+    <circle cx="150" cy="66" r="10"/><circle cx="150" cy="118" r="10"/><circle cx="124" cy="92" r="10"/><circle cx="176" cy="92" r="10"/>
+    <circle cx="246" cy="66" r="10"/><circle cx="246" cy="118" r="10"/><circle cx="220" cy="92" r="10"/><circle cx="272" cy="92" r="10"/></g>
+  <!-- Corps + objectif -->
+  <rect x="112" y="138" width="170" height="82" rx="8" fill="#2B2B2B"/>
+  <path d="M282 160 L338 140 V218 L282 198 Z" fill="#4A4A4A"/>
+  <circle cx="150" cy="178" r="12" fill="#6B6B6B"/>
+  <!-- Trépied -->
+  <path d="M197 220 L160 262 M197 220 L197 262 M197 220 L234 262" stroke="#2B2B2B" stroke-width="7" stroke-linecap="round"/>
+</svg>

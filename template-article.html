@@ -50,9 +50,6 @@
             ink:   '#1A1A1A', // texte principal et filets
             muted: '#6B6B6B', // texte secondaire
             cream: '#F6F2EC', // fond des encadrés (TL;DR)
-            gold:  '#C9973A', // pastille Ingénierie Financière
-            teal:  '#3C8F84', // pastille Data & Stratégie
-            coral: '#C8503F', // pastille Études de cas
           },
           fontFamily: {
             serif: ['"Playfair Display"', 'Georgia', 'serif'],
@@ -132,19 +129,18 @@
        ====================================================================== -->
   <header class="px-5 pt-10 sm:pt-12">
     <div class="text-center">
-      <a href="index.html" class="inline-block">
+      <a href="index.html" class="inline-flex flex-col items-center">
+        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" class="w-11 h-11 mb-4">
         <p class="font-serif font-extrabold tracking-tight text-4xl sm:text-5xl leading-none">
           Popcorn &amp; Capital
         </p>
       </a>
-      <div class="mt-4 flex items-center justify-center gap-3 sm:gap-5 text-[10px] font-medium uppercase tracking-[0.25em]">
-        <span class="text-right">Carnet de recherche</span>
-        <img src="logo.svg" alt="" class="w-9 h-9 shrink-0">
-        <span class="text-left">Ingénierie financière du cinéma</span>
-      </div>
+      <p class="mt-4 text-[10px] font-medium uppercase tracking-[0.25em] text-muted">
+        Carnet de recherche <span class="mx-1.5">·</span> Ingénierie financière du cinéma
+      </p>
     </div>
 
-    <nav class="max-w-6xl mx-auto mt-8 border-t-[5px] border-double border-ink border-b" aria-label="Navigation principale">
+    <nav class="max-w-6xl mx-auto mt-6 border-t-[5px] border-double border-ink border-b" aria-label="Navigation principale">
       <ul class="flex flex-wrap justify-center gap-x-8 sm:gap-x-14 gap-y-2 py-4 text-[11px] font-medium uppercase tracking-[0.22em]">
         <li><a href="index.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Accueil</a></li>
         <li><a href="index.html#ingenierie-financiere" aria-current="page" class="pb-1 border-b border-ink">Ingénierie Financière</a></li>
@@ -166,9 +162,9 @@
            ================================================================ -->
       <header class="max-w-3xl mx-auto text-center">
 
-        <!-- ✏️ À MODIFIER : LA CATÉGORIE (pastille bg-gold, bg-teal ou bg-coral) -->
-        <p class="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.3em]">
-          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>Ingénierie Financière
+        <!-- ✏️ À MODIFIER : LA CATÉGORIE -->
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em]">
+          Ingénierie Financière
         </p>
 
         <!-- ✏️ À MODIFIER : LE TITRE DE L'ARTICLE -->
@@ -192,9 +188,10 @@
       </header>
 
       <!-- ✏️ À MODIFIER : L'IMAGE D'EN-TÊTE (facultatif — supprimez le bloc <figure> si inutile).
-           Pour une photo : placez-la dans le dossier images/ et changez le src. -->
+           Pour une photo : placez-la dans le dossier images/ et changez le src.
+           Elle s'affiche en noir et blanc ; retirez "grayscale" pour la garder en couleur. -->
       <figure class="max-w-4xl mx-auto mt-12">
-        <img src="images/ingenierie-financiere.svg" alt="" class="w-full aspect-[16/9] object-cover">
+        <img src="images/ingenierie-financiere.svg" alt="" class="w-full aspect-[16/9] object-cover grayscale">
         <!-- Légende de l'image (facultatif) -->
         <figcaption class="mt-3 text-center text-xs italic text-muted">Légende de l'image ou crédit photo.</figcaption>
       </figure>
