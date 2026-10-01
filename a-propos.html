@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <!--
   ==========================================================================
-  POPCORN & CAPITAL — Accueil (index.html)
-  Carnet de recherche privé : Ingénierie Financière du Cinéma.
+  POPCORN & CAPITAL — À propos (a-propos.html)
   --------------------------------------------------------------------------
-  L'accueil affiche TOUS les contenus (articles, études de cas, fiches),
-  du plus récent au plus ancien, avec un bouton pour inverser l'ordre.
-
-  FICHIERS UTILISÉS (dans le même dossier) :
-    - contenus.js            → LA LISTE DE TOUS VOS CONTENUS (le seul fichier à
-                               modifier pour ajouter un article, une étude, une fiche)
-    - assets/style.css       → couleurs (mode clair / sombre) et mise en forme
-    - assets/tailwind-config.js, assets/site.js → fonctionnement (ne pas modifier)
-    - logo.svg, images/      → le logo et les images
+  Présentation de l'auteur·rice et du carnet.
+  ✏️ Remplacez les textes entre les repères "VOTRE ... COMMENCE ICI" et
+  "... SE TERMINE ICI".
   ==========================================================================
 -->
 <html lang="fr">
@@ -24,7 +17,7 @@
        Elle demande à Google (et aux autres moteurs) de ne pas indexer la page. -->
   <meta name="robots" content="noindex, nofollow">
 
-  <title>Popcorn &amp; Capital — Carnet de recherche</title>
+  <title>À propos — Popcorn &amp; Capital</title>
   <link rel="icon" type="image/svg+xml" href="logo.svg">
 
   <!-- POLICES : Playfair Display (titres) + Inter (textes) -->
@@ -73,34 +66,97 @@
 
     <nav class="max-w-6xl mx-auto mt-6 border-t-[5px] border-double border-ink border-b" aria-label="Navigation principale">
       <ul class="flex flex-wrap justify-center gap-x-8 sm:gap-x-14 gap-y-2 py-4 text-[11px] font-medium uppercase tracking-[0.22em]">
-        <li><a href="index.html" aria-current="page" class="pb-1 border-b border-ink">Accueil</a></li>
+        <li><a href="index.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Accueil</a></li>
         <li><a href="etudes-de-cas.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Études de cas</a></li>
         <li><a href="fiches-techniques.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Fiches techniques</a></li>
-        <li><a href="a-propos.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">À propos</a></li>
+        <li><a href="a-propos.html" aria-current="page" class="pb-1 border-b border-ink">À propos</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="px-5">
-    <section class="max-w-6xl mx-auto pt-12 sm:pt-16">
-      <h1 class="sr-only">Tous les contenus</h1>
+  <main class="px-5 py-14 sm:py-20">
+    <div class="max-w-2xl mx-auto">
 
-      <!-- Barre d'outils : nombre de contenus + choix de l'ordre d'affichage -->
-      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-ink/15 pb-4 mb-12">
-        <p id="compteur" class="text-[11px] font-medium uppercase tracking-[0.25em] text-muted"></p>
-        <div class="flex items-center gap-5 text-[11px] font-medium uppercase tracking-[0.2em]" role="group" aria-label="Ordre d'affichage">
-          <span class="text-muted">Trier :</span>
-          <button type="button" class="choix" data-ordre="recent" aria-pressed="true">Plus récents</button>
-          <button type="button" class="choix" data-ordre="ancien" aria-pressed="false">Plus anciens</button>
-        </div>
+      <!-- TITRE DE LA PAGE -->
+      <div class="text-center">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-muted">Le carnet et moi</p>
+        <h1 class="mt-4 font-serif text-4xl sm:text-6xl leading-tight">À propos</h1>
       </div>
-      <!-- La grille se remplit toute seule à partir du fichier contenus.js.
-           Pour ajouter un contenu ici, c'est dans contenus.js que ça se passe. -->
-      <div id="grille" data-type="tout" class="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3"></div>
 
-      <p id="grille-vide" hidden class="py-16 text-center font-serif italic text-xl text-muted">Aucun contenu pour le moment.</p>
-      <noscript><p class="py-16 text-center text-muted">Activez JavaScript pour afficher les contenus.</p></noscript>
-    </section>
+      <!-- ==================================================================
+           QUI SUIS-JE ?
+           ✏️ Pour ajouter votre photo : placez-la dans images/ (ex : images/portrait.jpg)
+           et remplacez le <div> du médaillon par :
+           <img src="images/portrait.jpg" alt="Portrait" class="w-36 h-36 rounded-full object-cover mx-auto">
+           ================================================================== -->
+      <section class="mt-16 text-center">
+        <div class="w-36 h-36 rounded-full bg-cream mx-auto flex items-center justify-center">
+          <img src="logo.svg" alt="" class="w-16 h-16">
+        </div>
+
+        <h2 class="mt-8 font-serif text-3xl">Qui suis-je&nbsp;?</h2>
+
+        <div class="article-body sans-lettrine mt-6 text-left">
+          <!-- ▼▼▼ ✏️ VOTRE PRÉSENTATION COMMENCE ICI ▼▼▼ -->
+          <p>
+            Présentez-vous en quelques lignes : votre parcours, ce qui vous a mené
+            vers la finance du cinéma, ce que vous étudiez ou faites aujourd'hui.
+          </p>
+          <p>
+            Vous pouvez aussi dire ce que vous cherchez à comprendre avec ce carnet,
+            et les films ou les lectures qui vous ont donné envie de le commencer.
+          </p>
+          <!-- ▲▲▲ VOTRE PRÉSENTATION SE TERMINE ICI ▲▲▲ -->
+        </div>
+      </section>
+
+      <hr class="my-16 border-ink/20">
+
+      <!-- ==================================================================
+           LE CARNET : la vision du site (l'ancien édito)
+           ================================================================== -->
+      <section>
+        <h2 class="text-center font-serif text-3xl sm:text-4xl leading-tight">
+          Suivre l'argent, <em>image par image.</em>
+        </h2>
+
+        <div class="article-body sans-lettrine mt-8">
+          <!-- ▼▼▼ ✏️ VOTRE TEXTE SUR LE SITE COMMENCE ICI ▼▼▼ -->
+          <p>
+            Derrière chaque film qui arrive en salle, il y a un montage financier aussi
+            minutieux que son montage image : préventes, crédits d'impôt, soutiens publics,
+            coproductions internationales, gap financing… Ce carnet est l'endroit où je
+            décortique ces mécanismes.
+          </p>
+          <p>
+            J'y consigne mes lectures, mes modèles, mes hypothèses et mes études de cas,
+            avec une conviction : comprendre comment un film se finance, c'est comprendre
+            pourquoi il existe.
+          </p>
+          <!-- ▲▲▲ VOTRE TEXTE SUR LE SITE SE TERMINE ICI ▲▲▲ -->
+
+          <h3>Ce que vous trouverez ici</h3>
+          <ul>
+            <li><a href="index.html">L'accueil</a> : tous les contenus, du plus récent au plus ancien (ou l'inverse).</li>
+            <li><a href="etudes-de-cas.html">Les études de cas</a> : des films réels, disséqués.</li>
+            <li><a href="fiches-techniques.html">Les fiches techniques</a> : schémas, résumés, définitions et explications.</li>
+          </ul>
+        </div>
+
+        <!-- Signature (facultatif : modifiez ou supprimez) -->
+        <p class="mt-10 text-center font-serif italic text-lg">— Carnet ouvert le 1<sup>er</sup> octobre 2026</p>
+      </section>
+
+      <!-- CONFIDENTIALITÉ -->
+      <aside class="mt-16 bg-cream px-7 sm:px-10 py-8 text-center">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.3em]">Un carnet privé</p>
+        <div class="mx-auto mt-3 mb-5 w-10 border-t border-ink"></div>
+        <p class="text-[15px] leading-relaxed text-ink/80">
+          Ce site est un carnet de recherche personnel, non référencé par les moteurs
+          de recherche. Merci de ne pas en partager l'adresse.
+        </p>
+      </aside>
+    </div>
   </main>
 
   <!-- ======================================================================
@@ -118,8 +174,7 @@
     </div>
   </footer>
 
-  <!-- JAVASCRIPT : la liste des contenus, puis le fonctionnement des pages -->
-  <script src="contenus.js"></script>
+  <!-- JAVASCRIPT : bouton mode clair / sombre -->
   <script src="assets/site.js"></script>
 </body>
 </html>
