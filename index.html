@@ -5,18 +5,16 @@
   Carnet de recherche privé : Ingénierie Financière du Cinéma.
   --------------------------------------------------------------------------
   STRUCTURE DE CE FICHIER :
-    1. <head>      → réglages (confidentialité, police, Tailwind, couleurs)
-    2. <header>    → la barre du haut, visible uniquement sur téléphone
-    3. <aside>     → la barre latérale gauche (identique sur toutes les pages)
-    4. <main>      → la zone de lecture : bandeau, édito, axes, articles
-    5. <script>    → le petit menu pour l'affichage sur téléphone
+    1. <head>    → réglages (confidentialité, polices, Tailwind, couleurs)
+    2. <header>  → le grand titre centré + le menu entre deux filets
+                   (identique sur toutes les pages)
+    3. <main>    → la grille des articles, puis l'édito
+    4. <footer>  → la mention de confidentialité
+    5. <script>  → le filtre par catégorie du menu
 
-  FICHIERS NÉCESSAIRES dans le même dossier : logo.svg (le logo).
-
-  CODE COULEUR DES CATÉGORIES (utilisé partout sur le site) :
-    - Ingénierie Financière → gold  (doré)
-    - Data & Stratégie      → teal  (turquoise)
-    - Études de cas         → coral (rouge cinéma)
+  FICHIERS NÉCESSAIRES dans le même dossier :
+    - logo.svg  (le logo)
+    - images/   (les images des cartes d'articles)
   ==========================================================================
 -->
 <html lang="fr">
@@ -30,37 +28,33 @@
   <meta name="robots" content="noindex, nofollow">
 
   <title>Popcorn &amp; Capital — Carnet de recherche</title>
-
-  <!-- Icône de l'onglet du navigateur (le logo) -->
   <link rel="icon" type="image/svg+xml" href="logo.svg">
 
-  <!-- POLICE : Inter (style éditorial, sans-serif) chargée depuis Google Fonts -->
+  <!-- POLICES : Playfair Display (titres, style magazine) + Inter (textes et menu) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-  <!-- TAILWIND CSS via CDN : rien à installer, tout est chargé en ligne -->
+  <!-- TAILWIND CSS via CDN : rien à installer -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- PALETTE DU SITE : modifiez les couleurs ici, elles s'appliqueront partout.
-       Exemple : "bg-ink" = fond principal, "text-gold" = texte doré. -->
+  <!-- PALETTE ET POLICES DU SITE : modifiez ici, cela s'applique partout.
+       "font-serif" = Playfair Display, "font-sans" = Inter. -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            ink:   '#121212', // fond principal (gris très foncé)
-            panel: '#17151B', // fond de la barre latérale
-            card:  '#1D1B22', // fond des cartes et encadrés
-            line:  '#2C2933', // traits de séparation
-            paper: '#E0E0E0', // texte principal (blanc cassé)
-            muted: '#9A96A3', // texte secondaire
-            gold:  '#F2B544', // Ingénierie Financière — doré "lumière de projecteur"
-            teal:  '#3CC8B4', // Data & Stratégie — turquoise "écran de cotation"
-            coral: '#EF5B4C', // Études de cas — rouge "velours de salle"
+            ink:   '#1A1A1A', // texte principal et filets (presque noir)
+            muted: '#6B6B6B', // texte secondaire (gris)
+            cream: '#F6F2EC', // fond des encadrés (crème)
+            gold:  '#C9973A', // pastille Ingénierie Financière
+            teal:  '#3C8F84', // pastille Data & Stratégie
+            coral: '#C8503F', // pastille Études de cas
           },
           fontFamily: {
-            sans: ['Inter', '"Helvetica Neue"', 'Helvetica', 'Arial', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans:  ['Inter', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
           },
         },
       },
@@ -68,344 +62,230 @@
   </script>
 
   <style>
-    /* Lissage du texte pour une lecture plus agréable sur fond sombre */
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    ::selection { background: #F2B544; color: #121212; }
-
-    /* Grain de pellicule très léger posé sur toute la page (effet "film") */
-    .grain {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-      opacity: .05;
-    }
-
-    /* Bande de perforations de pellicule sur le bord droit de la sidebar */
-    .film-strip {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='22'><rect x='3' y='5' width='8' height='11' rx='2' fill='%23121212'/></svg>");
-      background-repeat: repeat-y;
-    }
-
-    /* Bandeau défilant façon "cotations" (purement décoratif) */
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .ticker { animation: ticker 40s linear infinite; }
-    @media (prefers-reduced-motion: reduce) { .ticker { animation: none; } }
+    ::selection { background: #1A1A1A; color: #fff; }
   </style>
 </head>
 
-<body class="bg-ink text-paper font-sans leading-relaxed">
-
-  <!-- Décor d'ambiance : grain + halos lumineux colorés (ne pas modifier) -->
-  <div class="grain pointer-events-none fixed inset-0 z-[60]" aria-hidden="true"></div>
-  <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
-    <div class="absolute -top-40 right-[-10%] w-[36rem] h-[36rem] rounded-full bg-coral/15 blur-3xl"></div>
-    <div class="absolute top-1/3 left-[20%] w-[28rem] h-[28rem] rounded-full bg-gold/10 blur-3xl"></div>
-    <div class="absolute -bottom-40 right-[15%] w-[30rem] h-[30rem] rounded-full bg-teal/10 blur-3xl"></div>
-  </div>
+<body class="bg-white text-ink font-sans">
 
   <!-- ======================================================================
-       BARRE DU HAUT — visible uniquement sur téléphone / petit écran
-       ====================================================================== -->
-  <header class="lg:hidden sticky top-0 z-40 flex items-center justify-between px-5 py-3 bg-ink/85 backdrop-blur border-b border-line">
-    <a href="index.html" class="flex items-center gap-2.5">
-      <img src="logo.svg" alt="" class="w-8 h-8">
-      <span class="text-sm font-bold tracking-[0.18em] uppercase">Popcorn <span class="text-gold">&amp;</span> Capital</span>
-    </a>
-    <button id="menu-toggle" class="p-2 rounded-lg border border-line bg-panel text-paper"
-            aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
-      </svg>
-    </button>
-  </header>
-
-  <!-- ======================================================================
-       BARRE LATÉRALE (SIDEBAR) — fixe, 25 % de la largeur sur grand écran.
+       EN-TÊTE : TITRE + SOUS-TITRE + MENU
        ⚠️ Si vous modifiez le menu, faites la même modification dans
-       template-article.html (et dans vos articles) pour garder un site cohérent.
+       template-article.html (et dans vos articles).
        ====================================================================== -->
-  <aside id="sidebar"
-         class="fixed inset-y-0 left-0 z-[55] w-72 lg:w-1/4 bg-gradient-to-b from-panel to-ink border-r border-line
-                flex flex-col justify-between pl-8 pr-10 py-10
-                -translate-x-full lg:translate-x-0 transition-transform duration-300">
-
-    <!-- Perforations de pellicule (décor) -->
-    <div class="film-strip absolute inset-y-0 right-0 w-3.5 bg-[#1F1C24]" aria-hidden="true"></div>
-
-    <div>
-      <!-- LOGO + TITRE DU SITE -->
-      <a href="index.html" class="flex items-center gap-3 group">
-        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" class="w-12 h-12 shrink-0 transition-transform group-hover:-rotate-6">
-        <h1 class="text-lg font-extrabold leading-tight tracking-[0.18em] uppercase text-paper">
-          Popcorn<br><span class="text-gold">&amp;</span> Capital
+  <header class="px-5 pt-12 sm:pt-16">
+    <div class="text-center">
+      <a href="index.html" class="inline-block">
+        <h1 class="font-serif font-extrabold tracking-tight text-5xl sm:text-7xl leading-none">
+          Popcorn &amp; Capital
         </h1>
       </a>
-      <p class="mt-5 text-sm text-muted leading-snug">
-        Carnet de recherche en Ingénierie Financière du Cinéma.
+
+      <!-- Sous-titre de part et d'autre du logo (le logo joue le rôle d'ornement) -->
+      <div class="mt-5 flex items-center justify-center gap-3 sm:gap-5 text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.25em]">
+        <span class="text-right">Carnet de recherche</span>
+        <img src="logo.svg" alt="" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0">
+        <span class="text-left">Ingénierie financière du cinéma</span>
+      </div>
+    </div>
+
+    <!-- MENU : double filet au-dessus, filet simple en dessous.
+         Les catégories filtrent la grille d'articles (voir le script en bas). -->
+    <nav class="max-w-6xl mx-auto mt-10 border-t-[5px] border-double border-ink border-b" aria-label="Navigation principale">
+      <ul class="flex flex-wrap justify-center gap-x-8 sm:gap-x-14 gap-y-2 py-4 text-[11px] font-medium uppercase tracking-[0.22em]">
+        <li><a href="index.html" data-nav="tout" class="nav-link pb-1 border-b border-transparent hover:border-ink transition-colors">Accueil</a></li>
+        <li><a href="index.html#ingenierie-financiere" data-nav="ingenierie-financiere" class="nav-link pb-1 border-b border-transparent hover:border-ink transition-colors">Ingénierie Financière</a></li>
+        <li><a href="index.html#data-strategie" data-nav="data-strategie" class="nav-link pb-1 border-b border-transparent hover:border-ink transition-colors">Data &amp; Stratégie</a></li>
+        <li><a href="index.html#etudes-de-cas" data-nav="etudes-de-cas" class="nav-link pb-1 border-b border-transparent hover:border-ink transition-colors">Études de cas</a></li>
+        <li><a href="index.html#edito" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Édito</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="px-5">
+
+    <!-- ====================================================================
+         GRILLE DES ARTICLES
+         Chaque article = une "carte" <article> ... </article>.
+         Les plus récents en premier : ajoutez les nouveaux EN HAUT de la grille.
+         ==================================================================== -->
+    <section class="max-w-6xl mx-auto pt-12 sm:pt-16" aria-labelledby="titre-grille">
+      <!-- Titre de la grille : le script le remplace par le nom de la catégorie filtrée -->
+      <h2 id="titre-grille" class="sr-only">Derniers articles</h2>
+
+      <div id="grille" class="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+
+        <!-- ================================================================
+             AJOUTER UN NOUVEL ARTICLE ICI (une carte par article)
+             Copiez-collez le bloc ci-dessous (sans les signes de commentaire)
+             et modifiez :
+               1. data-category : ingenierie-financiere, data-strategie ou etudes-de-cas
+                  (c'est ce qui permet au menu de filtrer)
+               2. href          : le nom du fichier de l'article (ex : article-1.html)
+               3. src de l'image : une illustration du dossier images/, ou votre
+                  propre photo (ex : images/article-1.jpg), idéalement au format paysage
+               4. l'étiquette   : le nom de la catégorie + la couleur de la pastille
+                  (bg-gold, bg-teal ou bg-coral)
+               5. le titre et la date
+
+        <article class="carte" data-category="ingenierie-financiere">
+          <a href="article-1.html" class="group block">
+            <div class="relative overflow-hidden">
+              <img src="images/ingenierie-financiere.svg" alt="" class="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105">
+              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-white px-6 pt-3 pb-2 text-[10px] font-medium uppercase tracking-[0.25em] whitespace-nowrap">
+                <span class="inline-block w-1.5 h-1.5 mr-1.5 mb-0.5 rounded-full bg-gold"></span>Ingénierie Financière
+              </span>
+            </div>
+            <h3 class="mt-5 px-4 text-center font-serif text-2xl leading-snug group-hover:underline underline-offset-4 decoration-1">Titre de l'article</h3>
+            <p class="mt-2 text-center text-[11px] uppercase tracking-[0.2em] text-muted">1er octobre 2026</p>
+          </a>
+        </article>
+             ================================================================ -->
+
+        <!-- ▼ CARTES D'EXEMPLE : elles mènent toutes au modèle d'article.
+               Supprimez-les quand vous aurez vos vrais articles. ▼ -->
+
+        <article class="carte" data-category="ingenierie-financiere">
+          <a href="template-article.html" class="group block">
+            <div class="relative overflow-hidden">
+              <img src="images/ingenierie-financiere.svg" alt="" class="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105">
+              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-white px-6 pt-3 pb-2 text-[10px] font-medium uppercase tracking-[0.25em] whitespace-nowrap">
+                <span class="inline-block w-1.5 h-1.5 mr-1.5 mb-0.5 rounded-full bg-gold"></span>Ingénierie Financière
+              </span>
+            </div>
+            <h3 class="mt-5 px-4 text-center font-serif text-2xl leading-snug group-hover:underline underline-offset-4 decoration-1">Le gap financing, ou l'art de combler le dernier trou</h3>
+            <p class="mt-2 text-center text-[11px] uppercase tracking-[0.2em] text-muted">Exemple</p>
+          </a>
+        </article>
+
+        <article class="carte" data-category="data-strategie">
+          <a href="template-article.html" class="group block">
+            <div class="relative overflow-hidden">
+              <img src="images/data-strategie.svg" alt="" class="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105">
+              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-white px-6 pt-3 pb-2 text-[10px] font-medium uppercase tracking-[0.25em] whitespace-nowrap">
+                <span class="inline-block w-1.5 h-1.5 mr-1.5 mb-0.5 rounded-full bg-teal"></span>Data &amp; Stratégie
+              </span>
+            </div>
+            <h3 class="mt-5 px-4 text-center font-serif text-2xl leading-snug group-hover:underline underline-offset-4 decoration-1">Ce que le box-office ne dit pas</h3>
+            <p class="mt-2 text-center text-[11px] uppercase tracking-[0.2em] text-muted">Exemple</p>
+          </a>
+        </article>
+
+        <article class="carte" data-category="etudes-de-cas">
+          <a href="template-article.html" class="group block">
+            <div class="relative overflow-hidden">
+              <img src="images/etudes-de-cas.svg" alt="" class="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105">
+              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-white px-6 pt-3 pb-2 text-[10px] font-medium uppercase tracking-[0.25em] whitespace-nowrap">
+                <span class="inline-block w-1.5 h-1.5 mr-1.5 mb-0.5 rounded-full bg-coral"></span>Études de cas
+              </span>
+            </div>
+            <h3 class="mt-5 px-4 text-center font-serif text-2xl leading-snug group-hover:underline underline-offset-4 decoration-1">Anatomie du plan de financement d'un film d'auteur</h3>
+            <p class="mt-2 text-center text-[11px] uppercase tracking-[0.2em] text-muted">Exemple</p>
+          </a>
+        </article>
+
+        <!-- ▲ FIN DES CARTES D'EXEMPLE ▲ -->
+      </div>
+
+      <!-- Message affiché par le script quand une catégorie n'a encore aucun article -->
+      <p id="grille-vide" class="hidden py-16 text-center font-serif italic text-xl text-muted">
+        Aucun article dans cette catégorie pour le moment.
       </p>
+    </section>
 
-      <!-- MENU DE NAVIGATION
-           Chaque catégorie a sa pastille de couleur.
-           Lien ACTIF = fond "bg-white/5" + texte "text-paper font-medium".
-           Lien inactif = "text-muted hover:text-paper hover:bg-white/5". -->
-      <nav class="mt-12" aria-label="Navigation principale">
-        <p class="text-[11px] uppercase tracking-[0.25em] text-muted/70 mb-3 px-3">Sommaire</p>
-        <ul class="space-y-1 text-sm">
-          <li>
-            <!-- Lien ACTIF (on est sur l'accueil) -->
-            <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/5 text-paper font-medium">
-              <span class="w-2 h-2 rounded-full bg-paper"></span>Accueil
-            </a>
-          </li>
-          <li>
-            <a href="index.html#ingenierie-financiere" class="flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-paper hover:bg-white/5 transition-colors">
-              <span class="w-2 h-2 rounded-full bg-gold"></span>Ingénierie Financière
-            </a>
-          </li>
-          <li>
-            <a href="index.html#data-strategie" class="flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-paper hover:bg-white/5 transition-colors">
-              <span class="w-2 h-2 rounded-full bg-teal"></span>Data &amp; Stratégie
-            </a>
-          </li>
-          <li>
-            <a href="index.html#etudes-de-cas" class="flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-paper hover:bg-white/5 transition-colors">
-              <span class="w-2 h-2 rounded-full bg-coral"></span>Études de cas
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <!-- ====================================================================
+         ÉDITO / MA VISION
+         Remplacez les paragraphes ci-dessous par votre propre texte.
+         Chaque paragraphe = une balise <p> ... </p>
+         ==================================================================== -->
+    <section id="edito" class="scroll-mt-8 max-w-6xl mx-auto mt-24 border-t border-ink">
+      <div class="max-w-2xl mx-auto py-20 text-center">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-muted">Édito · Ma vision</p>
 
-    <!-- Mention de confidentialité en bas de la sidebar -->
-    <div class="flex items-center gap-2.5 text-[11px] text-muted rounded-lg border border-coral/25 bg-coral/5 px-3 py-2.5">
-      <svg class="w-4 h-4 shrink-0 text-coral" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="5" y="11" width="14" height="10" rx="1.5"/>
-        <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
-      </svg>
-      <span>Carnet de recherche privé — Ne pas partager</span>
-    </div>
-  </aside>
+        <h2 class="mt-6 font-serif text-4xl sm:text-5xl leading-tight">
+          Suivre l'argent, <em>image par image.</em>
+        </h2>
 
-  <!-- Voile sombre derrière le menu ouvert sur téléphone (cliquer dessus ferme le menu) -->
-  <div id="overlay" class="hidden fixed inset-0 z-50 bg-black/60 lg:hidden"></div>
+        <div class="mt-10 space-y-6 text-left sm:text-center text-[17px] leading-relaxed text-ink/85">
+          <!-- ▼▼▼ VOTRE TEXTE D'ÉDITO COMMENCE ICI ▼▼▼ -->
+          <p>
+            Derrière chaque film qui arrive en salle, il y a un montage financier aussi
+            minutieux que son montage image : préventes, crédits d'impôt, soutiens publics,
+            coproductions internationales, gap financing… Ce carnet est l'endroit où je
+            décortique ces mécanismes.
+          </p>
+          <p>
+            J'y consigne mes lectures, mes modèles, mes hypothèses et mes études de cas,
+            avec une conviction : comprendre comment un film se finance, c'est comprendre
+            pourquoi il existe.
+          </p>
+          <!-- ▲▲▲ VOTRE TEXTE D'ÉDITO SE TERMINE ICI ▲▲▲ -->
+        </div>
 
-  <!-- ======================================================================
-       ZONE DE LECTURE PRINCIPALE (à droite de la sidebar)
-       ====================================================================== -->
-  <main class="relative lg:ml-[25%] min-h-screen">
-
-    <!-- ==================================================================
-         BANDEAU DÉFILANT façon "cotations" — purement décoratif.
-         Pour changer les mots : modifiez les <span> ci-dessous.
-         ⚠️ Le contenu est écrit DEUX FOIS à l'identique (c'est ce qui rend
-         le défilement continu) : faites la même modification dans les deux.
-         ================================================================== -->
-    <div class="overflow-hidden border-b border-line bg-panel/70 backdrop-blur text-[11px] uppercase tracking-[0.2em]" aria-hidden="true">
-      <div class="ticker flex w-max gap-10 py-2.5 whitespace-nowrap">
-        <!-- Contenu n°1 -->
-        <span class="text-muted">Préventes <span class="text-teal">▲</span></span>
-        <span class="text-muted">Crédit d'impôt <span class="text-teal">▲</span></span>
-        <span class="text-muted">Box-office <span class="text-gold">◆</span></span>
-        <span class="text-muted">Gap financing <span class="text-coral">▼</span></span>
-        <span class="text-muted">Coproduction <span class="text-teal">▲</span></span>
-        <span class="text-muted">Minimum garanti <span class="text-gold">◆</span></span>
-        <span class="text-muted">Streaming <span class="text-teal">▲</span></span>
-        <span class="text-muted">Recoupement <span class="text-coral">▼</span></span>
-        <!-- Contenu n°2 (copie identique du n°1) -->
-        <span class="text-muted">Préventes <span class="text-teal">▲</span></span>
-        <span class="text-muted">Crédit d'impôt <span class="text-teal">▲</span></span>
-        <span class="text-muted">Box-office <span class="text-gold">◆</span></span>
-        <span class="text-muted">Gap financing <span class="text-coral">▼</span></span>
-        <span class="text-muted">Coproduction <span class="text-teal">▲</span></span>
-        <span class="text-muted">Minimum garanti <span class="text-gold">◆</span></span>
-        <span class="text-muted">Streaming <span class="text-teal">▲</span></span>
-        <span class="text-muted">Recoupement <span class="text-coral">▼</span></span>
+        <!-- Signature (facultatif : modifiez ou supprimez) -->
+        <p class="mt-10 font-serif italic text-lg">— Carnet ouvert le 1<sup>er</sup> octobre 2026</p>
       </div>
-    </div>
-
-    <div class="px-6 sm:px-12 lg:px-20 xl:px-28 py-16 lg:py-24">
-      <div class="max-w-3xl">
-
-        <!-- ================================================================
-             ÉDITO / MA VISION
-             Remplacez les paragraphes ci-dessous par votre propre texte.
-             Chaque paragraphe = une balise <p> ... </p>
-             ================================================================ -->
-        <section id="edito">
-          <span class="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-gold">
-            <span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Édito · N°0
-          </span>
-
-          <!-- Titre de l'édito : la 2e ligne est en dégradé de couleur -->
-          <h2 class="mt-8 text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05] text-paper">
-            Suivre l'argent,<br>
-            <span class="bg-gradient-to-r from-coral via-gold to-teal bg-clip-text text-transparent">image par image.</span>
-          </h2>
-
-          <div class="mt-12 max-w-2xl space-y-6 text-[17px] text-paper/90">
-            <!-- ▼▼▼ VOTRE TEXTE D'ÉDITO COMMENCE ICI ▼▼▼ -->
-            <p class="text-xl text-paper leading-relaxed">
-              Derrière chaque film qui arrive en salle, il y a un montage financier aussi
-              minutieux que son montage image.
-            </p>
-            <p>
-              Préventes, crédits d'impôt, soutiens publics, coproductions internationales,
-              gap financing… Ce carnet est l'endroit où je décortique ces mécanismes.
-              J'y consigne mes lectures, mes modèles, mes hypothèses et mes études de cas,
-              avec une conviction : comprendre comment un film se finance, c'est comprendre
-              pourquoi il existe.
-            </p>
-            <!-- ▲▲▲ VOTRE TEXTE D'ÉDITO SE TERMINE ICI ▲▲▲ -->
-          </div>
-
-          <!-- Signature (facultatif : modifiez ou supprimez) -->
-          <p class="mt-10 text-sm text-muted">— Carnet ouvert le 1<sup>er</sup> octobre 2026.</p>
-        </section>
-
-        <!-- ================================================================
-             LES TROIS AXES DE RECHERCHE (cartes colorées cliquables)
-             Pour changer une description, modifiez le texte du <p> de la carte.
-             ================================================================ -->
-        <section class="mt-20 grid gap-4 sm:grid-cols-3">
-
-          <!-- Carte : Ingénierie Financière (doré) -->
-          <a href="#ingenierie-financiere" class="group relative overflow-hidden rounded-2xl border border-line bg-card/80 p-6 transition hover:-translate-y-1 hover:border-gold/50">
-            <div class="absolute inset-x-0 top-0 h-1 bg-gold"></div>
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 text-gold">
-              <!-- Icône : pièces empilées -->
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>
-            </div>
-            <h3 class="mt-5 font-semibold text-paper">Ingénierie Financière</h3>
-            <p class="mt-2 text-sm text-muted leading-relaxed">Les outils et les structures qui font exister un film.</p>
-            <span class="mt-4 inline-block text-xs text-gold opacity-0 transition group-hover:opacity-100">Voir les articles →</span>
-          </a>
-
-          <!-- Carte : Data & Stratégie (turquoise) -->
-          <a href="#data-strategie" class="group relative overflow-hidden rounded-2xl border border-line bg-card/80 p-6 transition hover:-translate-y-1 hover:border-teal/50">
-            <div class="absolute inset-x-0 top-0 h-1 bg-teal"></div>
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal/15 text-teal">
-              <!-- Icône : graphique -->
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M4 16l5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg>
-            </div>
-            <h3 class="mt-5 font-semibold text-paper">Data &amp; Stratégie</h3>
-            <p class="mt-2 text-sm text-muted leading-relaxed">Ce que les chiffres disent du marché et des publics.</p>
-            <span class="mt-4 inline-block text-xs text-teal opacity-0 transition group-hover:opacity-100">Voir les articles →</span>
-          </a>
-
-          <!-- Carte : Études de cas (rouge cinéma) -->
-          <a href="#etudes-de-cas" class="group relative overflow-hidden rounded-2xl border border-line bg-card/80 p-6 transition hover:-translate-y-1 hover:border-coral/50">
-            <div class="absolute inset-x-0 top-0 h-1 bg-coral"></div>
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-coral/15 text-coral">
-              <!-- Icône : pellicule -->
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18M16 3v18M4 8h4M4 12h4M4 16h4M16 8h4M16 12h4M16 16h4"/></svg>
-            </div>
-            <h3 class="mt-5 font-semibold text-paper">Études de cas</h3>
-            <p class="mt-2 text-sm text-muted leading-relaxed">Des films réels, disséqués de la préproduction à la salle.</p>
-            <span class="mt-4 inline-block text-xs text-coral opacity-0 transition group-hover:opacity-100">Voir les articles →</span>
-          </a>
-        </section>
-
-        <!-- ================================================================
-             SOMMAIRE DES ARTICLES, PAR CATÉGORIE
-             Pour chaque nouvel article, ajoutez un lien dans la bonne catégorie
-             en copiant-collant le bloc <li> ... </li> modèle indiqué plus bas.
-             ================================================================ -->
-
-        <!-- ---------- Catégorie : INGÉNIERIE FINANCIÈRE (doré) ---------- -->
-        <section id="ingenierie-financiere" class="scroll-mt-24 mt-24">
-          <h3 class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold mb-6">
-            <span class="w-2 h-2 rounded-full bg-gold"></span>Ingénierie Financière
-            <span class="flex-1 h-px bg-gradient-to-r from-gold/40 to-transparent"></span>
-          </h3>
-          <ul class="space-y-3">
-
-            <!-- AJOUTER UN LIEN VERS UN NOUVEL ARTICLE "INGÉNIERIE FINANCIÈRE" ICI
-                 Copiez-collez ce bloc (sans les signes de commentaire) et changez :
-                 le nom du fichier (href), le titre, la date et le numéro d'édition.
-
-            <li>
-              <a href="article-1.html" class="group flex items-center justify-between gap-6 rounded-xl border border-line bg-card/70 px-5 py-4 transition hover:border-gold/50 hover:bg-card">
-                <div>
-                  <p class="font-medium text-paper group-hover:text-gold transition-colors">Titre de l'article</p>
-                  <p class="mt-1 text-xs text-muted">01.10.2026 · Édition n°1</p>
-                </div>
-                <span class="text-muted transition group-hover:translate-x-1 group-hover:text-gold">→</span>
-              </a>
-            </li>
-            -->
-
-            <!-- Lien d'exemple vers le modèle (à supprimer quand vous aurez vos vrais articles) -->
-            <li>
-              <a href="template-article.html" class="group flex items-center justify-between gap-6 rounded-xl border border-line bg-card/70 px-5 py-4 transition hover:border-gold/50 hover:bg-card">
-                <div>
-                  <p class="font-medium text-paper group-hover:text-gold transition-colors">Modèle d'article (exemple)</p>
-                  <p class="mt-1 text-xs text-muted">01.10.2026 · Édition n°1</p>
-                </div>
-                <span class="text-muted transition group-hover:translate-x-1 group-hover:text-gold">→</span>
-              </a>
-            </li>
-          </ul>
-        </section>
-
-        <!-- ---------- Catégorie : DATA & STRATÉGIE (turquoise) ---------- -->
-        <section id="data-strategie" class="scroll-mt-24 mt-16">
-          <h3 class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-teal mb-6">
-            <span class="w-2 h-2 rounded-full bg-teal"></span>Data &amp; Stratégie
-            <span class="flex-1 h-px bg-gradient-to-r from-teal/40 to-transparent"></span>
-          </h3>
-          <ul class="space-y-3">
-
-            <!-- AJOUTER UN LIEN VERS UN NOUVEL ARTICLE "DATA & STRATÉGIE" ICI
-                 Même bloc <li> que dans Ingénierie Financière, mais remplacez
-                 les 3 mots "gold" par "teal" pour avoir la bonne couleur. -->
-
-            <!-- Message affiché tant que la catégorie est vide (supprimez-le au premier article) -->
-            <li class="rounded-xl border border-dashed border-line px-5 py-4 text-sm text-muted italic">Aucun article pour le moment.</li>
-          </ul>
-        </section>
-
-        <!-- ---------- Catégorie : ÉTUDES DE CAS (rouge cinéma) ---------- -->
-        <section id="etudes-de-cas" class="scroll-mt-24 mt-16">
-          <h3 class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-coral mb-6">
-            <span class="w-2 h-2 rounded-full bg-coral"></span>Études de cas
-            <span class="flex-1 h-px bg-gradient-to-r from-coral/40 to-transparent"></span>
-          </h3>
-          <ul class="space-y-3">
-
-            <!-- AJOUTER UN LIEN VERS UN NOUVEL ARTICLE "ÉTUDES DE CAS" ICI
-                 Même bloc <li> que dans Ingénierie Financière, mais remplacez
-                 les 3 mots "gold" par "coral" pour avoir la bonne couleur. -->
-
-            <li class="rounded-xl border border-dashed border-line px-5 py-4 text-sm text-muted italic">Aucun article pour le moment.</li>
-          </ul>
-        </section>
-
-      </div>
-    </div>
+    </section>
   </main>
 
   <!-- ======================================================================
-       JAVASCRIPT — uniquement pour ouvrir/fermer le menu sur téléphone.
+       PIED DE PAGE : mention de confidentialité (identique sur toutes les pages)
+       ====================================================================== -->
+  <footer class="px-5 pb-12">
+    <div class="max-w-6xl mx-auto border-t-[5px] border-double border-ink pt-8 flex flex-col items-center gap-3 text-center">
+      <p class="font-serif font-bold text-xl">Popcorn &amp; Capital</p>
+      <p class="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.25em] text-muted">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+        Carnet de recherche privé — Ne pas partager
+      </p>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       JAVASCRIPT — filtre de la grille selon la catégorie choisie dans le menu.
+       Il lit la fin de l'adresse (#ingenierie-financiere, etc.).
        Aucune modification nécessaire.
        ====================================================================== -->
   <script>
     (function () {
-      var sidebar = document.getElementById('sidebar');
-      var overlay = document.getElementById('overlay');
-      var toggle  = document.getElementById('menu-toggle');
+      var NOMS = {
+        'ingenierie-financiere': 'Ingénierie Financière',
+        'data-strategie': 'Data & Stratégie',
+        'etudes-de-cas': 'Études de cas'
+      };
+      var cartes = document.querySelectorAll('.carte');
+      var liens  = document.querySelectorAll('.nav-link');
+      var titre  = document.getElementById('titre-grille');
+      var vide   = document.getElementById('grille-vide');
 
-      function setOpen(open) {
-        sidebar.classList.toggle('-translate-x-full', !open);
-        overlay.classList.toggle('hidden', !open);
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      function filtrer() {
+        var choix = location.hash.slice(1);
+        var categorie = NOMS[choix] ? choix : null;
+        var visibles = 0;
+
+        cartes.forEach(function (carte) {
+          var montrer = !categorie || carte.dataset.category === categorie;
+          carte.hidden = !montrer;
+          if (montrer) visibles++;
+        });
+
+        vide.classList.toggle('hidden', visibles > 0);
+        titre.textContent = categorie ? NOMS[categorie] : 'Derniers articles';
+
+        // Souligne le lien actif du menu
+        liens.forEach(function (lien) {
+          var actif = lien.dataset.nav === (categorie || 'tout');
+          lien.classList.toggle('border-ink', actif);
+          lien.classList.toggle('border-transparent', !actif);
+          if (actif) lien.setAttribute('aria-current', 'page'); else lien.removeAttribute('aria-current');
+        });
       }
 
-      toggle.addEventListener('click', function () {
-        setOpen(sidebar.classList.contains('-translate-x-full'));
-      });
-      overlay.addEventListener('click', function () { setOpen(false); });
-      // Ferme le menu quand on clique sur un lien (utile pour les ancres #)
-      sidebar.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () { setOpen(false); });
-      });
+      window.addEventListener('hashchange', filtrer);
+      filtrer();
     })();
   </script>
 </body>

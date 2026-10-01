@@ -7,21 +7,17 @@
     1. Dupliquez ce fichier et renommez la copie (ex : article-1.html).
        Utilisez des minuscules, des tirets, et pas d'accents ni d'espaces.
     2. Dans la copie, cherchez les commentaires "✏️ À MODIFIER" et
-       remplacez les textes d'exemple (titre, date, tags, TL;DR, contenu).
-    3. Ajoutez un lien vers le nouvel article dans index.html, à l'endroit
-       marqué "AJOUTER UN LIEN VERS UN NOUVEL ARTICLE ... ICI".
+       remplacez les textes d'exemple (catégorie, titre, date, tags, image,
+       TL;DR, contenu).
+    3. Ajoutez une carte pour ce nouvel article dans index.html, à l'endroit
+       marqué "AJOUTER UN NOUVEL ARTICLE ICI".
 
   BONNE NOUVELLE : dans la zone de texte de l'article, vous n'avez besoin
   d'AUCUNE classe CSS. Écrivez simplement <h2>, <h3>, <p>, <ul>, <li>,
   <blockquote>, <strong>, <table>... : la mise en forme est appliquée
   automatiquement (voir le bloc <style> ".article-body" dans le <head>).
 
-  FICHIERS NÉCESSAIRES dans le même dossier : logo.svg (le logo).
-
-  CODE COULEUR DES CATÉGORIES :
-    - Ingénierie Financière → gold  (doré)
-    - Data & Stratégie      → teal  (turquoise)
-    - Études de cas         → coral (rouge cinéma)
+  FICHIERS NÉCESSAIRES dans le même dossier : logo.svg et le dossier images/.
   ==========================================================================
 -->
 <html lang="fr">
@@ -35,35 +31,32 @@
 
   <!-- ✏️ À MODIFIER : le titre affiché dans l'onglet du navigateur -->
   <title>Titre de l'article — Popcorn &amp; Capital</title>
-
   <link rel="icon" type="image/svg+xml" href="logo.svg">
 
-  <!-- POLICE : Inter -->
+  <!-- POLICES : Playfair Display (titres) + Inter (textes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
   <!-- TAILWIND CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- PALETTE DU SITE (identique à index.html — gardez les deux synchronisées) -->
+  <!-- PALETTE ET POLICES (identiques à index.html — gardez les deux synchronisées) -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            ink:   '#121212', // fond principal
-            panel: '#17151B', // fond de la sidebar
-            card:  '#1D1B22', // fond des cartes et encadrés
-            line:  '#2C2933', // traits de séparation
-            paper: '#E0E0E0', // texte principal
-            muted: '#9A96A3', // texte secondaire
-            gold:  '#F2B544', // Ingénierie Financière
-            teal:  '#3CC8B4', // Data & Stratégie
-            coral: '#EF5B4C', // Études de cas
+            ink:   '#1A1A1A', // texte principal et filets
+            muted: '#6B6B6B', // texte secondaire
+            cream: '#F6F2EC', // fond des encadrés (TL;DR)
+            gold:  '#C9973A', // pastille Ingénierie Financière
+            teal:  '#3C8F84', // pastille Data & Stratégie
+            coral: '#C8503F', // pastille Études de cas
           },
           fontFamily: {
-            sans: ['Inter', '"Helvetica Neue"', 'Helvetica', 'Arial', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans:  ['Inter', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
           },
         },
       },
@@ -72,357 +65,271 @@
 
   <style>
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    ::selection { background: #F2B544; color: #121212; }
-
-    /* Grain de pellicule + perforations de la sidebar (décor, identiques à index.html) */
-    .grain {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-      opacity: .05;
-    }
-    .film-strip {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='22'><rect x='3' y='5' width='8' height='11' rx='2' fill='%23121212'/></svg>");
-      background-repeat: repeat-y;
-    }
+    ::selection { background: #1A1A1A; color: #fff; }
 
     /* ====================================================================
        MISE EN FORME AUTOMATIQUE DU CORPS DE L'ARTICLE
        Tout ce qui est placé dans <div class="article-body"> est stylé ici.
-       Vous pouvez donc coller du HTML "nu" sans vous soucier des classes.
        ==================================================================== */
-    .article-body { font-size: 17px; line-height: 1.8; color: rgba(224,224,224,0.9); }
+    .article-body { font-size: 17px; line-height: 1.85; color: rgba(26,26,26,0.88); }
     .article-body > * + * { margin-top: 1.5rem; }
 
-    /* Sous-titre H2 : précédé d'une petite barre en dégradé rouge → doré */
+    /* Premier paragraphe : lettrine façon magazine */
+    .article-body > p:first-of-type::first-letter {
+      font-family: "Playfair Display", Georgia, serif; font-weight: 700;
+      float: left; font-size: 4.2rem; line-height: 0.9; padding: 0.35rem 0.6rem 0 0; color: #1A1A1A;
+    }
+
+    /* Sous-titre H2 : grand titre serif */
     .article-body h2 {
-      margin-top: 4rem; font-size: 1.65rem; line-height: 1.25; font-weight: 700;
-      letter-spacing: -0.01em; color: #E0E0E0;
+      margin-top: 3.5rem; font-family: "Playfair Display", Georgia, serif;
+      font-size: 2rem; line-height: 1.2; font-weight: 500; color: #1A1A1A;
     }
-    .article-body h2::before {
-      content: ""; display: block; width: 2.5rem; height: 4px; border-radius: 999px;
-      margin-bottom: 1rem; background: linear-gradient(90deg, #EF5B4C, #F2B544);
-    }
-    /* Sous-titre H3 : petites capitales turquoise */
+    /* Sous-titre H3 : petites capitales espacées */
     .article-body h3 {
-      margin-top: 2.75rem; font-size: 0.8rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.2em; color: #3CC8B4;
+      margin-top: 2.5rem; font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.25em; color: #1A1A1A;
     }
     .article-body h2 + *, .article-body h3 + * { margin-top: 1rem; }
 
-    .article-body strong { color: #F2B544; font-weight: 600; }
-    .article-body a { color: #E0E0E0; text-decoration: underline; text-decoration-color: #F2B544; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-    .article-body a:hover { color: #F2B544; }
+    .article-body strong { color: #1A1A1A; font-weight: 600; }
+    .article-body a { color: #1A1A1A; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+    .article-body a:hover { text-decoration-thickness: 2px; }
 
-    /* Listes à puces (puces dorées) et numérotées */
     .article-body ul { list-style: none; padding-left: 0; }
     .article-body ul li { position: relative; padding-left: 1.5rem; }
-    .article-body ul li::before {
-      content: ""; position: absolute; left: 0.25rem; top: 0.75em;
-      width: 6px; height: 6px; border-radius: 999px; background: #F2B544;
-    }
+    .article-body ul li::before { content: "—"; position: absolute; left: 0; color: #6B6B6B; }
     .article-body ol { list-style: decimal; padding-left: 1.5rem; }
-    .article-body ol li::marker { color: #F2B544; font-weight: 600; }
+    .article-body ol li::marker { font-family: "Playfair Display", Georgia, serif; font-weight: 700; }
     .article-body li + li { margin-top: 0.5rem; }
 
-    /* Citation : encadré rouge cinéma */
+    /* Citation : grande, en italique, entre deux filets */
     .article-body blockquote {
-      border-left: 3px solid #EF5B4C; background: rgba(239,91,76,0.07);
-      padding: 1.25rem 1.5rem; border-radius: 0 0.75rem 0.75rem 0;
-      font-size: 1.2rem; line-height: 1.6; font-style: italic; color: #E0E0E0;
+      margin: 3rem 0; padding: 1.75rem 0; text-align: center;
+      border-top: 1px solid #1A1A1A; border-bottom: 1px solid #1A1A1A;
+      font-family: "Playfair Display", Georgia, serif; font-style: italic;
+      font-size: 1.6rem; line-height: 1.4; color: #1A1A1A;
     }
 
     /* Tableau (pratique pour les plans de financement) */
     .article-body table { width: 100%; border-collapse: collapse; font-size: 15px; }
-    .article-body thead th { text-align: left; font-weight: 600; color: #F2B544; font-size: 11px;
-                             text-transform: uppercase; letter-spacing: 0.15em; background: rgba(242,181,68,0.08); }
-    .article-body th, .article-body td { padding: 0.8rem 0.9rem; border-bottom: 1px solid #2C2933; }
-    .article-body tbody tr:hover { background: rgba(255,255,255,0.03); }
+    .article-body thead th { text-align: left; font-weight: 600; font-size: 10px; text-transform: uppercase;
+                             letter-spacing: 0.2em; border-bottom: 2px solid #1A1A1A; }
+    .article-body th, .article-body td { padding: 0.8rem 0.5rem; border-bottom: 1px solid #E2DDD5; }
 
-    .article-body hr { border: 0; height: 1px; margin: 3.5rem 0;
-                       background: linear-gradient(90deg, #EF5B4C, #F2B544, #3CC8B4); opacity: .5; }
+    .article-body hr { border: 0; text-align: center; margin: 3rem 0; }
+    .article-body hr::after { content: "✦  ✦  ✦"; color: #6B6B6B; letter-spacing: 0.5em; }
   </style>
 </head>
 
-<body class="bg-ink text-paper font-sans leading-relaxed">
+<body class="bg-white text-ink font-sans">
 
-  <!-- Décor d'ambiance : grain + halos lumineux (ne pas modifier) -->
-  <div class="grain pointer-events-none fixed inset-0 z-[60]" aria-hidden="true"></div>
-  <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
-    <div class="absolute -top-40 right-[-10%] w-[36rem] h-[36rem] rounded-full bg-gold/10 blur-3xl"></div>
-    <div class="absolute -bottom-40 left-[25%] w-[30rem] h-[30rem] rounded-full bg-coral/10 blur-3xl"></div>
-  </div>
+  <!-- ======================================================================
+       EN-TÊTE : copie de celle de index.html (titre un peu plus petit).
+       ✏️ Pour souligner la catégorie de l'article dans le menu, ajoutez
+       aria-current="page" et remplacez "border-transparent" par "border-ink"
+       sur son lien (ici, l'exemple est classé en Ingénierie Financière).
+       ====================================================================== -->
+  <header class="px-5 pt-10 sm:pt-12">
+    <div class="text-center">
+      <a href="index.html" class="inline-block">
+        <p class="font-serif font-extrabold tracking-tight text-4xl sm:text-5xl leading-none">
+          Popcorn &amp; Capital
+        </p>
+      </a>
+      <div class="mt-4 flex items-center justify-center gap-3 sm:gap-5 text-[10px] font-medium uppercase tracking-[0.25em]">
+        <span class="text-right">Carnet de recherche</span>
+        <img src="logo.svg" alt="" class="w-9 h-9 shrink-0">
+        <span class="text-left">Ingénierie financière du cinéma</span>
+      </div>
+    </div>
 
-  <!-- BARRE DU HAUT (téléphone uniquement) -->
-  <header class="lg:hidden sticky top-0 z-40 flex items-center justify-between px-5 py-3 bg-ink/85 backdrop-blur border-b border-line">
-    <a href="index.html" class="flex items-center gap-2.5">
-      <img src="logo.svg" alt="" class="w-8 h-8">
-      <span class="text-sm font-bold tracking-[0.18em] uppercase">Popcorn <span class="text-gold">&amp;</span> Capital</span>
-    </a>
-    <button id="menu-toggle" class="p-2 rounded-lg border border-line bg-panel text-paper"
-            aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
-      </svg>
-    </button>
+    <nav class="max-w-6xl mx-auto mt-8 border-t-[5px] border-double border-ink border-b" aria-label="Navigation principale">
+      <ul class="flex flex-wrap justify-center gap-x-8 sm:gap-x-14 gap-y-2 py-4 text-[11px] font-medium uppercase tracking-[0.22em]">
+        <li><a href="index.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Accueil</a></li>
+        <li><a href="index.html#ingenierie-financiere" aria-current="page" class="pb-1 border-b border-ink">Ingénierie Financière</a></li>
+        <li><a href="index.html#data-strategie" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Data &amp; Stratégie</a></li>
+        <li><a href="index.html#etudes-de-cas" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Études de cas</a></li>
+        <li><a href="index.html#edito" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Édito</a></li>
+      </ul>
+    </nav>
   </header>
 
   <!-- ======================================================================
-       BARRE LATÉRALE (SIDEBAR) — copie exacte de celle de index.html,
-       sauf le lien actif.
-       ✏️ Pour mettre en avant la catégorie de l'article : sur son lien,
-       remplacez "text-muted hover:text-paper hover:bg-white/5 transition-colors"
-       par "bg-white/5 text-paper font-medium" (et inversement sur l'ancien).
+       L'ARTICLE
        ====================================================================== -->
-  <aside id="sidebar"
-         class="fixed inset-y-0 left-0 z-[55] w-72 lg:w-1/4 bg-gradient-to-b from-panel to-ink border-r border-line
-                flex flex-col justify-between pl-8 pr-10 py-10
-                -translate-x-full lg:translate-x-0 transition-transform duration-300">
-
-    <div class="film-strip absolute inset-y-0 right-0 w-3.5 bg-[#1F1C24]" aria-hidden="true"></div>
-
-    <div>
-      <a href="index.html" class="flex items-center gap-3 group">
-        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" class="w-12 h-12 shrink-0 transition-transform group-hover:-rotate-6">
-        <h1 class="text-lg font-extrabold leading-tight tracking-[0.18em] uppercase text-paper">
-          Popcorn<br><span class="text-gold">&amp;</span> Capital
-        </h1>
-      </a>
-      <p class="mt-5 text-sm text-muted leading-snug">
-        Carnet de recherche en Ingénierie Financière du Cinéma.
-      </p>
-
-      <nav class="mt-12" aria-label="Navigation principale">
-        <p class="text-[11px] uppercase tracking-[0.25em] text-muted/70 mb-3 px-3">Sommaire</p>
-        <ul class="space-y-1 text-sm">
-          <li>
-            <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-paper hover:bg-white/5 transition-colors">
-              <span class="w-2 h-2 rounded-full bg-paper"></span>Accueil
-            </a>
-          </li>
-          <li>
-            <!-- Exemple : catégorie ACTIVE (cet article est classé en Ingénierie Financière) -->
-            <a href="index.html#ingenierie-financiere" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/5 text-paper font-medium">
-              <span class="w-2 h-2 rounded-full bg-gold"></span>Ingénierie Financière
-            </a>
-          </li>
-          <li>
-            <a href="index.html#data-strategie" class="flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-paper hover:bg-white/5 transition-colors">
-              <span class="w-2 h-2 rounded-full bg-teal"></span>Data &amp; Stratégie
-            </a>
-          </li>
-          <li>
-            <a href="index.html#etudes-de-cas" class="flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-paper hover:bg-white/5 transition-colors">
-              <span class="w-2 h-2 rounded-full bg-coral"></span>Études de cas
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="flex items-center gap-2.5 text-[11px] text-muted rounded-lg border border-coral/25 bg-coral/5 px-3 py-2.5">
-      <svg class="w-4 h-4 shrink-0 text-coral" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="5" y="11" width="14" height="10" rx="1.5"/>
-        <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
-      </svg>
-      <span>Carnet de recherche privé — Ne pas partager</span>
-    </div>
-  </aside>
-
-  <div id="overlay" class="hidden fixed inset-0 z-50 bg-black/60 lg:hidden"></div>
-
-  <!-- ======================================================================
-       ZONE DE LECTURE — L'ARTICLE
-       ====================================================================== -->
-  <main class="relative lg:ml-[25%] min-h-screen px-6 sm:px-12 lg:px-20 xl:px-28 py-14 lg:py-20">
-    <article class="max-w-2xl">
-
-      <!-- Lien de retour vers l'accueil -->
-      <a href="index.html" class="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-muted hover:text-paper hover:border-paper/40 transition-colors">
-        <span aria-hidden="true">←</span> Retour au carnet
-      </a>
+  <main class="px-5 py-14 sm:py-20">
+    <article>
 
       <!-- ================================================================
-           EN-TÊTE DE L'ARTICLE : tags, titre, date
+           EN-TÊTE DE L'ARTICLE (centré)
            ================================================================ -->
-      <header class="mt-12">
+      <header class="max-w-3xl mx-auto text-center">
 
-        <!-- ✏️ À MODIFIER : LES TAGS
-             Le 1er tag = la catégorie, dans sa couleur. Pour une autre catégorie,
-             remplacez les 3 mots "gold" par "teal" (Data & Stratégie) ou "coral" (Études de cas).
-             Les tags suivants = mots-clés libres : copiez-collez une ligne pour en ajouter. -->
-        <div class="flex flex-wrap gap-2">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] rounded-full bg-gold/15 text-gold border border-gold/30">
-            <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>Ingénierie Financière
-          </span>
-          <span class="px-3 py-1 text-[11px] uppercase tracking-[0.15em] rounded-full bg-white/5 text-muted border border-line">#Préventes</span>
-          <span class="px-3 py-1 text-[11px] uppercase tracking-[0.15em] rounded-full bg-white/5 text-muted border border-line">#Gap financing</span>
-        </div>
+        <!-- ✏️ À MODIFIER : LA CATÉGORIE (pastille bg-gold, bg-teal ou bg-coral) -->
+        <p class="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.3em]">
+          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>Ingénierie Financière
+        </p>
 
         <!-- ✏️ À MODIFIER : LE TITRE DE L'ARTICLE -->
-        <h2 class="mt-8 text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.08] text-paper">
+        <h1 class="mt-6 font-serif text-4xl sm:text-6xl leading-[1.1]">
           Titre de l'article : une accroche claire et précise
-        </h2>
+        </h1>
 
         <!-- ✏️ À MODIFIER : LA DATE, le numéro d'édition et le temps de lecture -->
-        <div class="mt-8 flex flex-wrap items-center gap-3 text-sm">
-          <span class="inline-flex items-center gap-2 rounded-lg bg-card border border-line px-3 py-1.5 text-muted">
-            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
-            <time datetime="2026-10-01">1<sup>er</sup> octobre 2026</time>
-          </span>
-          <span class="inline-flex items-center gap-2 rounded-lg bg-card border border-line px-3 py-1.5 text-muted">
-            <svg class="w-4 h-4 text-coral" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 6l2 4M12 6l2 4M17 6l2 4"/></svg>
-            Édition n°1
-          </span>
-          <span class="inline-flex items-center gap-2 rounded-lg bg-card border border-line px-3 py-1.5 text-muted">
-            <svg class="w-4 h-4 text-teal" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
-            8 min de lecture
-          </span>
+        <p class="mt-6 text-[11px] uppercase tracking-[0.25em] text-muted">
+          <time datetime="2026-10-01">1<sup>er</sup> octobre 2026</time>
+          <span class="mx-2">·</span> Édition n°1
+          <span class="mx-2">·</span> 8 min de lecture
+        </p>
+
+        <!-- ✏️ À MODIFIER : LES TAGS (un <span> par tag ; copiez-collez pour en ajouter) -->
+        <div class="mt-6 flex flex-wrap justify-center gap-2">
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Préventes</span>
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Gap financing</span>
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Montage financier</span>
         </div>
       </header>
 
-      <!-- Séparateur en dégradé -->
-      <div class="mt-12 h-px bg-gradient-to-r from-coral via-gold to-teal opacity-60"></div>
+      <!-- ✏️ À MODIFIER : L'IMAGE D'EN-TÊTE (facultatif — supprimez le bloc <figure> si inutile).
+           Pour une photo : placez-la dans le dossier images/ et changez le src. -->
+      <figure class="max-w-4xl mx-auto mt-12">
+        <img src="images/ingenierie-financiere.svg" alt="" class="w-full aspect-[16/9] object-cover">
+        <!-- Légende de l'image (facultatif) -->
+        <figcaption class="mt-3 text-center text-xs italic text-muted">Légende de l'image ou crédit photo.</figcaption>
+      </figure>
 
-      <!-- ================================================================
-           ✏️ À MODIFIER : ENCADRÉ TL;DR (le résumé en quelques points)
-           ================================================================ -->
-      <aside class="relative mt-12 overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 via-card to-card p-7">
-        <div class="flex items-center gap-3">
-          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gold text-ink">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
-          </span>
-          <p class="text-xs font-bold uppercase tracking-[0.3em] text-gold">TL;DR — L'essentiel</p>
+      <div class="max-w-2xl mx-auto">
+
+        <!-- ================================================================
+             ✏️ À MODIFIER : ENCADRÉ TL;DR (le résumé en quelques points)
+             ================================================================ -->
+        <aside class="mt-14 bg-cream px-7 sm:px-10 py-8">
+          <p class="text-center text-[11px] font-semibold uppercase tracking-[0.3em]">TL;DR — L'essentiel</p>
+          <div class="mx-auto mt-3 mb-6 w-10 border-t border-ink"></div>
+          <ul class="space-y-3 text-[15px] leading-relaxed text-ink/85">
+            <li class="flex gap-3"><span class="font-serif font-bold">1.</span>Premier point clé de l'article, en une phrase.</li>
+            <li class="flex gap-3"><span class="font-serif font-bold">2.</span>Deuxième point clé : le chiffre ou le mécanisme à retenir.</li>
+            <li class="flex gap-3"><span class="font-serif font-bold">3.</span>Troisième point clé : la conclusion ou l'ouverture.</li>
+          </ul>
+        </aside>
+
+        <!-- ================================================================
+             CORPS DE L'ARTICLE
+             ================================================================ -->
+        <div class="article-body mt-14">
+
+          <!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+               AJOUTER UN NOUVEL ARTICLE ICI
+               Collez votre texte entre cette ligne et la ligne "FIN DE L'ARTICLE".
+               Supprimez d'abord tout le texte d'exemple ci-dessous.
+               (La première lettre du premier paragraphe devient une lettrine.)
+
+               Aide-mémoire des balises :
+                 <p>Un paragraphe.</p>
+                 <h2>Un grand sous-titre</h2>
+                 <h3>Un petit sous-titre</h3>
+                 <strong>texte en gras</strong>   <em>texte en italique</em>
+                 <ul><li>Une puce</li><li>Une autre puce</li></ul>
+                 <ol><li>Étape 1</li><li>Étape 2</li></ol>
+                 <blockquote>Une citation mise en valeur.</blockquote>
+                 <a href="https://...">un lien</a>
+                 <hr>  (un séparateur décoratif ✦ ✦ ✦)
+               ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ -->
+
+          <p>
+            Paragraphe d'introduction. Posez le contexte : de quel film, de quel mécanisme
+            ou de quelle question de recherche parle-t-on ? Pourquoi est-ce important
+            aujourd'hui ? Ce premier paragraphe donne envie de lire la suite.
+          </p>
+
+          <p>
+            Un second paragraphe peut préciser l'angle choisi. On peut y mettre une
+            <strong>notion clé en gras</strong>, ou un <a href="#">lien vers une source</a>.
+          </p>
+
+          <h2>Premier grand sous-titre</h2>
+
+          <p>
+            Développement de la première partie. Les sous-titres H2 découpent l'article
+            en grandes sections, faciles à repérer en survolant la page.
+          </p>
+
+          <h3>Un sous-titre secondaire</h3>
+
+          <p>
+            Les sous-titres H3 servent à organiser une section en sous-parties.
+          </p>
+
+          <ul>
+            <li>Une première idée sous forme de liste.</li>
+            <li>Une deuxième idée, par exemple un poste du plan de financement.</li>
+            <li>Une troisième idée.</li>
+          </ul>
+
+          <blockquote>
+            « Une citation forte, extraite d'un entretien ou d'un rapport. »
+          </blockquote>
+
+          <h2>Deuxième grand sous-titre</h2>
+
+          <p>Exemple de tableau, pratique pour présenter un plan de financement :</p>
+
+          <table>
+            <thead>
+              <tr><th>Source</th><th>Montant</th><th>Part</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Préventes internationales</td><td>1,2 M€</td><td>40 %</td></tr>
+              <tr><td>Crédit d'impôt</td><td>0,6 M€</td><td>20 %</td></tr>
+              <tr><td>Coproduction</td><td>0,9 M€</td><td>30 %</td></tr>
+              <tr><td>Gap financing</td><td>0,3 M€</td><td>10 %</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h3>Conclusion</h3>
+
+          <p>
+            Paragraphe de conclusion : ce qu'il faut retenir, les limites de l'analyse
+            et les pistes pour une prochaine édition.
+          </p>
+
+          <!-- ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+               FIN DE L'ARTICLE — ne collez rien en dessous de cette ligne
+               ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ -->
         </div>
-        <ul class="mt-5 space-y-3 text-[15px] text-paper/90 leading-relaxed">
-          <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-gold"></span>Premier point clé de l'article, en une phrase.</li>
-          <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-gold"></span>Deuxième point clé : le chiffre ou le mécanisme à retenir.</li>
-          <li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-gold"></span>Troisième point clé : la conclusion ou l'ouverture.</li>
-        </ul>
-      </aside>
 
-      <!-- ================================================================
-           CORPS DE L'ARTICLE
-           ================================================================ -->
-      <div class="article-body mt-14">
+        <!-- Sources / notes (facultatif — supprimez si inutile) -->
+        <section class="mt-16 border-t border-ink pt-6 text-sm text-muted space-y-2">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-ink mb-3">Sources &amp; notes</p>
+          <!-- ✏️ À MODIFIER : une source par ligne <p> ... </p> -->
+          <p>[1] Auteur, <em>Titre de la source</em>, éditeur, année.</p>
+          <p>[2] Rapport ou base de données consultée.</p>
+        </section>
 
-        <!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-             AJOUTER UN NOUVEL ARTICLE ICI
-             Collez votre texte entre cette ligne et la ligne "FIN DE L'ARTICLE".
-             Supprimez d'abord tout le texte d'exemple ci-dessous.
-
-             Aide-mémoire des balises :
-               <p>Un paragraphe.</p>
-               <h2>Un grand sous-titre</h2>
-               <h3>Un petit sous-titre</h3>
-               <strong>texte mis en valeur (en doré)</strong>   <em>texte en italique</em>
-               <ul><li>Une puce</li><li>Une autre puce</li></ul>
-               <ol><li>Étape 1</li><li>Étape 2</li></ol>
-               <blockquote>Une citation mise en valeur.</blockquote>
-               <a href="https://...">un lien</a>
-               <hr>  (un trait de séparation coloré)
-             ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ -->
-
-        <p>
-          Paragraphe d'introduction. Posez le contexte : de quel film, de quel mécanisme
-          ou de quelle question de recherche parle-t-on ? Pourquoi est-ce important
-          aujourd'hui ? Ce premier paragraphe donne envie de lire la suite.
+        <!-- Retour à l'accueil -->
+        <p class="mt-14 text-center">
+          <a href="index.html" class="text-[11px] font-medium uppercase tracking-[0.25em] border-b border-ink pb-1 hover:text-muted transition-colors">
+            ← Retour au carnet
+          </a>
         </p>
-
-        <p>
-          Un second paragraphe peut préciser l'angle choisi. On peut y mettre une
-          <strong>notion clé en valeur</strong>, ou un <a href="#">lien vers une source</a>.
-        </p>
-
-        <h2>1. Premier grand sous-titre (H2)</h2>
-
-        <p>
-          Développement de la première partie. Les sous-titres H2 découpent l'article
-          en grandes sections, faciles à repérer en survolant la page.
-        </p>
-
-        <h3>Un sous-titre secondaire (H3)</h3>
-
-        <p>
-          Les sous-titres H3 servent à organiser une section en sous-parties. Ils
-          apparaissent en petites capitales turquoise.
-        </p>
-
-        <ul>
-          <li>Une première idée sous forme de liste.</li>
-          <li>Une deuxième idée, par exemple un poste du plan de financement.</li>
-          <li>Une troisième idée.</li>
-        </ul>
-
-        <blockquote>
-          « Une citation forte, extraite d'un entretien ou d'un rapport, mise en valeur. »
-        </blockquote>
-
-        <h2>2. Deuxième grand sous-titre (H2)</h2>
-
-        <p>Exemple de tableau, pratique pour présenter un plan de financement :</p>
-
-        <table>
-          <thead>
-            <tr><th>Source</th><th>Montant</th><th>Part</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Préventes internationales</td><td>1,2 M€</td><td>40 %</td></tr>
-            <tr><td>Crédit d'impôt</td><td>0,6 M€</td><td>20 %</td></tr>
-            <tr><td>Coproduction</td><td>0,9 M€</td><td>30 %</td></tr>
-            <tr><td>Gap financing</td><td>0,3 M€</td><td>10 %</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Conclusion</h3>
-
-        <p>
-          Paragraphe de conclusion : ce qu'il faut retenir, les limites de l'analyse
-          et les pistes pour une prochaine édition.
-        </p>
-
-        <!-- ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-             FIN DE L'ARTICLE — ne collez rien en dessous de cette ligne
-             ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ -->
-      </div>
-
-      <!-- Pied d'article : sources / notes (facultatif — supprimez si inutile) -->
-      <footer class="mt-20 rounded-2xl border border-line bg-card/60 p-6 text-sm text-muted space-y-2">
-        <p class="text-[11px] font-semibold uppercase tracking-[0.3em] text-teal mb-3">Sources &amp; notes</p>
-        <!-- ✏️ À MODIFIER : une source par ligne <p> ... </p> -->
-        <p>[1] Auteur, <em>Titre de la source</em>, éditeur, année.</p>
-        <p>[2] Rapport ou base de données consultée.</p>
-      </footer>
-
-      <!-- Fin de page : logo + retour -->
-      <div class="mt-14 flex items-center justify-between">
-        <a href="index.html" class="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-muted hover:text-paper hover:border-paper/40 transition-colors">
-          <span aria-hidden="true">←</span> Retour au carnet
-        </a>
-        <img src="logo.svg" alt="" class="w-8 h-8 opacity-60">
       </div>
     </article>
   </main>
 
-  <!-- JAVASCRIPT — menu téléphone uniquement (aucune modification nécessaire) -->
-  <script>
-    (function () {
-      var sidebar = document.getElementById('sidebar');
-      var overlay = document.getElementById('overlay');
-      var toggle  = document.getElementById('menu-toggle');
-
-      function setOpen(open) {
-        sidebar.classList.toggle('-translate-x-full', !open);
-        overlay.classList.toggle('hidden', !open);
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-
-      toggle.addEventListener('click', function () {
-        setOpen(sidebar.classList.contains('-translate-x-full'));
-      });
-      overlay.addEventListener('click', function () { setOpen(false); });
-      sidebar.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () { setOpen(false); });
-      });
-    })();
-  </script>
+  <!-- PIED DE PAGE : mention de confidentialité (identique à index.html) -->
+  <footer class="px-5 pb-12">
+    <div class="max-w-6xl mx-auto border-t-[5px] border-double border-ink pt-8 flex flex-col items-center gap-3 text-center">
+      <p class="font-serif font-bold text-xl">Popcorn &amp; Capital</p>
+      <p class="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.25em] text-muted">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+        Carnet de recherche privé — Ne pas partager
+      </p>
+    </div>
+  </footer>
 </body>
 </html>

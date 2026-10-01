@@ -1,0 +1,26 @@
+<!-- Illustration par défaut — catégorie Data & Stratégie (écran de cinéma + graphique). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E3EBE8"/><stop offset="1" stop-color="#B7CBC5"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Rideaux -->
+  <path d="M0 0 H70 C 60 90, 75 190, 52 300 H0 Z" fill="#8C3B33"/>
+  <path d="M400 0 H330 C 340 90, 325 190, 348 300 H400 Z" fill="#8C3B33"/>
+  <path d="M0 0 H400 V26 H0 Z" fill="#6F2C26"/>
+  <!-- Écran -->
+  <rect x="92" y="58" width="216" height="140" rx="4" fill="#2F3A3A"/>
+  <rect x="100" y="66" width="200" height="124" fill="#F6F3EC"/>
+  <!-- Barres -->
+  <g fill="#3C8F84">
+    <rect x="122" y="150" width="22" height="30" opacity=".55"/>
+    <rect x="156" y="132" width="22" height="48" opacity=".7"/>
+    <rect x="190" y="140" width="22" height="40" opacity=".85"/>
+    <rect x="224" y="112" width="22" height="68"/>
+    <rect x="258" y="94" width="22" height="86"/>
+  </g>
+  <polyline points="122,142 166,122 200,130 236,100 276,80" fill="none" stroke="#D9573F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="276" cy="80" r="6" fill="#D9573F"/>
+  <!-- Sièges -->
+  <g fill="#2F3A3A"><rect x="80" y="236" width="56" height="64" rx="10"/><rect x="146" y="236" width="56" height="64" rx="10"/><rect x="212" y="236" width="56" height="64" rx="10"/><rect x="278" y="236" width="56" height="64" rx="10"/></g>
+</svg>

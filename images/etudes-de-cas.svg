@@ -1,0 +1,23 @@
+<!-- Illustration par défaut — catégorie Études de cas (salle de cinéma). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2522"/><stop offset="1" stop-color="#1F1413"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".25" r=".6"><stop offset="0" stop-color="#F6E7C8" stop-opacity=".55"/><stop offset="1" stop-color="#F6E7C8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <rect width="400" height="300" fill="url(#glow)"/>
+  <!-- Écran lumineux -->
+  <rect x="70" y="34" width="260" height="110" rx="3" fill="#F6E7C8"/>
+  <!-- Silhouette de clap à l'écran -->
+  <g transform="translate(176 62)" fill="#3A2522">
+    <rect y="18" width="48" height="34" rx="3"/>
+    <path d="M0 14 L46 4 L48 12 L2 22 Z"/>
+  </g>
+  <!-- Rangées de sièges -->
+  <g fill="#8C3B33">
+    <rect x="30" y="178" width="44" height="34" rx="8"/><rect x="82" y="178" width="44" height="34" rx="8"/><rect x="134" y="178" width="44" height="34" rx="8"/><rect x="186" y="178" width="44" height="34" rx="8"/><rect x="238" y="178" width="44" height="34" rx="8"/><rect x="290" y="178" width="44" height="34" rx="8"/><rect x="342" y="178" width="44" height="34" rx="8"/>
+  </g>
+  <g fill="#A8463C">
+    <rect x="4" y="226" width="52" height="74" rx="10"/><rect x="64" y="226" width="52" height="74" rx="10"/><rect x="124" y="226" width="52" height="74" rx="10"/><rect x="184" y="226" width="52" height="74" rx="10"/><rect x="244" y="226" width="52" height="74" rx="10"/><rect x="304" y="226" width="52" height="74" rx="10"/><rect x="364" y="226" width="52" height="74" rx="10"/>
+  </g>
+</svg>
