@@ -1,15 +1,15 @@
 <!-- Illustration par défaut — pot de pop-corn. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-  <rect width="400" height="300" fill="#2B2B2B"/>
+  <rect width="400" height="300" fill="#7A2E28"/>
   <!-- Grains -->
-  <g fill="#F2EFE9">
+  <g fill="#F6E7C8">
     <circle cx="160" cy="92" r="20"/><circle cx="190" cy="76" r="22"/><circle cx="224" cy="84" r="21"/><circle cx="250" cy="100" r="18"/>
     <circle cx="146" cy="112" r="17"/><circle cx="178" cy="104" r="19"/><circle cx="210" cy="106" r="20"/><circle cx="240" cy="116" r="17"/>
   </g>
   <!-- Pot rayé -->
-  <path d="M138 118 H262 L244 264 H156 Z" fill="#F2EFE9"/>
-  <g fill="#2B2B2B" opacity=".85">
+  <path d="M138 118 H262 L244 264 H156 Z" fill="#F6E7C8"/>
+  <g fill="#C8503F">
     <path d="M160 118 H180 L176 264 H164 Z"/><path d="M200 118 H220 L222 264 H208 Z" transform="translate(-10 0)"/><path d="M232 118 H252 L240 264 H230 Z" transform="translate(-6 0)"/>
   </g>
-  <rect x="132" y="112" width="136" height="14" rx="3" fill="#F2EFE9"/>
+  <rect x="132" y="112" width="136" height="14" rx="3" fill="#F6E7C8"/>
 </svg>

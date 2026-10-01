@@ -1,11 +1,11 @@
 <!-- Illustration par défaut — tickets de cinéma. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-  <rect width="400" height="300" fill="#D9D5CE"/>
+  <rect width="400" height="300" fill="#E3D3B8"/>
   <g transform="rotate(-8 200 150)">
-    <path d="M90 100 H310 V132 A18 18 0 0 0 310 168 V200 H90 V168 A18 18 0 0 0 90 132 Z" fill="#2B2B2B"/>
-    <line x1="250" y1="108" x2="250" y2="192" stroke="#D9D5CE" stroke-width="3" stroke-dasharray="6 6"/>
-    <text x="170" y="142" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="bold" letter-spacing="4" fill="#F2EFE9">ADMIT</text>
-    <text x="170" y="172" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="bold" letter-spacing="4" fill="#F2EFE9">ONE</text>
-    <text x="280" y="158" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#F2EFE9">€</text>
+    <path d="M90 100 H310 V132 A18 18 0 0 0 310 168 V200 H90 V168 A18 18 0 0 0 90 132 Z" fill="#C8503F"/>
+    <line x1="250" y1="108" x2="250" y2="192" stroke="#E3D3B8" stroke-width="3" stroke-dasharray="6 6"/>
+    <text x="170" y="142" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="bold" letter-spacing="4" fill="#FBEFD9">ADMIT</text>
+    <text x="170" y="172" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="bold" letter-spacing="4" fill="#FBEFD9">ONE</text>
+    <text x="280" y="158" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#FBEFD9">€</text>
   </g>
 </svg>

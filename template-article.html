@@ -38,18 +38,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
+  <!-- MODE CLAIR / SOMBRE : applique le choix du lecteur AVANT l'affichage
+       (évite un flash blanc). Par défaut, suit le réglage de l'appareil. -->
+  <script>
+    (function () {
+      var choix = null;
+      try { choix = localStorage.getItem('theme'); } catch (e) {}
+      if (choix === 'dark' || (!choix && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
   <!-- TAILWIND CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- PALETTE ET POLICES (identiques à index.html — gardez les deux synchronisées) -->
   <script>
     tailwind.config = {
+      darkMode: 'class', // le mode sombre s'active avec la classe "dark" sur <html>
       theme: {
         extend: {
+          // Les couleurs sont définies plus bas dans <style> (:root et html.dark),
+          // ce qui permet de passer du mode clair au mode sombre.
           colors: {
-            ink:   '#1A1A1A', // texte principal et filets
-            muted: '#6B6B6B', // texte secondaire
-            cream: '#F6F2EC', // fond des encadrés (TL;DR)
+            paper: 'rgb(var(--paper) / <alpha-value>)', // fond de page
+            ink:   'rgb(var(--ink) / <alpha-value>)',   // texte principal et filets
+            muted: 'rgb(var(--muted) / <alpha-value>)', // texte secondaire
+            cream: 'rgb(var(--cream) / <alpha-value>)', // fond des encadrés (TL;DR)
           },
           fontFamily: {
             serif: ['"Playfair Display"', 'Georgia', 'serif'],
@@ -62,40 +78,59 @@
 
   <style>
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    ::selection { background: #1A1A1A; color: #fff; }
+    /* ====================================================================
+       COULEURS DU SITE (valeurs R G B)
+       :root      → mode clair : fond crème doux, moins agressif que le blanc pur
+       html.dark  → mode sombre : texte clair sur fond presque noir
+       Modifiez les chiffres ici pour ajuster les teintes.
+       ==================================================================== */
+    :root {
+      --paper: 248 244 236;  /* #F8F4EC fond crème */
+      --ink:   38 34 30;     /* #26221E brun très foncé (plus doux que le noir) */
+      --muted: 115 107 97;   /* #736B61 gris chaud */
+      --cream: 239 231 217;  /* #EFE7D9 encadrés */
+    }
+    html.dark {
+      --paper: 23 21 19;     /* #171513 */
+      --ink:   230 224 214;  /* #E6E0D6 */
+      --muted: 158 150 139;  /* #9E968B */
+      --cream: 37 34 31;     /* #25221F */
+    }
+    body { transition: background-color .3s, color .3s; }
+    ::selection { background: rgb(var(--ink)); color: rgb(var(--paper)); }
 
     /* ====================================================================
        MISE EN FORME AUTOMATIQUE DU CORPS DE L'ARTICLE
        Tout ce qui est placé dans <div class="article-body"> est stylé ici.
        ==================================================================== */
-    .article-body { font-size: 17px; line-height: 1.85; color: rgba(26,26,26,0.88); }
+    .article-body { font-size: 17px; line-height: 1.85; color: rgb(var(--ink) / .88); }
     .article-body > * + * { margin-top: 1.5rem; }
 
     /* Premier paragraphe : lettrine façon magazine */
     .article-body > p:first-of-type::first-letter {
       font-family: "Playfair Display", Georgia, serif; font-weight: 700;
-      float: left; font-size: 4.2rem; line-height: 0.9; padding: 0.35rem 0.6rem 0 0; color: #1A1A1A;
+      float: left; font-size: 4.2rem; line-height: 0.9; padding: 0.35rem 0.6rem 0 0; color: rgb(var(--ink));
     }
 
     /* Sous-titre H2 : grand titre serif */
     .article-body h2 {
       margin-top: 3.5rem; font-family: "Playfair Display", Georgia, serif;
-      font-size: 2rem; line-height: 1.2; font-weight: 500; color: #1A1A1A;
+      font-size: 2rem; line-height: 1.2; font-weight: 500; color: rgb(var(--ink));
     }
     /* Sous-titre H3 : petites capitales espacées */
     .article-body h3 {
       margin-top: 2.5rem; font-size: 0.75rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.25em; color: #1A1A1A;
+      text-transform: uppercase; letter-spacing: 0.25em; color: rgb(var(--ink));
     }
     .article-body h2 + *, .article-body h3 + * { margin-top: 1rem; }
 
-    .article-body strong { color: #1A1A1A; font-weight: 600; }
-    .article-body a { color: #1A1A1A; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+    .article-body strong { color: rgb(var(--ink)); font-weight: 600; }
+    .article-body a { color: rgb(var(--ink)); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
     .article-body a:hover { text-decoration-thickness: 2px; }
 
     .article-body ul { list-style: none; padding-left: 0; }
     .article-body ul li { position: relative; padding-left: 1.5rem; }
-    .article-body ul li::before { content: "—"; position: absolute; left: 0; color: #6B6B6B; }
+    .article-body ul li::before { content: "—"; position: absolute; left: 0; color: rgb(var(--muted)); }
     .article-body ol { list-style: decimal; padding-left: 1.5rem; }
     .article-body ol li::marker { font-family: "Playfair Display", Georgia, serif; font-weight: 700; }
     .article-body li + li { margin-top: 0.5rem; }
@@ -103,23 +138,23 @@
     /* Citation : grande, en italique, entre deux filets */
     .article-body blockquote {
       margin: 3rem 0; padding: 1.75rem 0; text-align: center;
-      border-top: 1px solid #1A1A1A; border-bottom: 1px solid #1A1A1A;
+      border-top: 1px solid rgb(var(--ink)); border-bottom: 1px solid rgb(var(--ink));
       font-family: "Playfair Display", Georgia, serif; font-style: italic;
-      font-size: 1.6rem; line-height: 1.4; color: #1A1A1A;
+      font-size: 1.6rem; line-height: 1.4; color: rgb(var(--ink));
     }
 
     /* Tableau (pratique pour les plans de financement) */
     .article-body table { width: 100%; border-collapse: collapse; font-size: 15px; }
     .article-body thead th { text-align: left; font-weight: 600; font-size: 10px; text-transform: uppercase;
-                             letter-spacing: 0.2em; border-bottom: 2px solid #1A1A1A; }
-    .article-body th, .article-body td { padding: 0.8rem 0.5rem; border-bottom: 1px solid #E2DDD5; }
+                             letter-spacing: 0.2em; border-bottom: 2px solid rgb(var(--ink)); }
+    .article-body th, .article-body td { padding: 0.8rem 0.5rem; border-bottom: 1px solid rgb(var(--ink) / .15); }
 
     .article-body hr { border: 0; text-align: center; margin: 3rem 0; }
-    .article-body hr::after { content: "✦  ✦  ✦"; color: #6B6B6B; letter-spacing: 0.5em; }
+    .article-body hr::after { content: "✦  ✦  ✦"; color: rgb(var(--muted)); letter-spacing: 0.5em; }
   </style>
 </head>
 
-<body class="bg-white text-ink font-sans">
+<body class="bg-paper text-ink font-sans">
 
   <!-- ======================================================================
        EN-TÊTE : copie de celle de index.html (titre un peu plus petit).
@@ -127,16 +162,27 @@
        aria-current="page" et remplacez "border-transparent" par "border-ink"
        sur son lien (ici, l'exemple est classé en Ingénierie Financière).
        ====================================================================== -->
-  <header class="px-5 pt-10 sm:pt-12">
+  <header class="relative px-5 pt-10 sm:pt-12">
+    <!-- BOUTON MODE CLAIR / SOMBRE (le choix est mémorisé par le navigateur) -->
+    <button id="theme-toggle" type="button"
+            class="absolute top-4 right-4 sm:top-6 sm:right-8 flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-muted hover:text-ink hover:border-ink/50 transition-colors"
+            aria-label="Basculer entre le mode clair et le mode sombre">
+      <!-- Lune (affichée en mode clair) -->
+      <svg class="w-3.5 h-3.5 dark:hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <!-- Soleil (affiché en mode sombre) -->
+      <svg class="w-3.5 h-3.5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <span class="hidden sm:inline dark:sm:hidden">Mode sombre</span>
+      <span class="hidden dark:sm:inline">Mode clair</span>
+    </button>
     <div class="text-center">
       <a href="index.html" class="inline-flex flex-col items-center">
-        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" class="w-11 h-11 mb-4">
         <p class="font-serif font-extrabold tracking-tight text-4xl sm:text-5xl leading-none">
           Popcorn &amp; Capital
         </p>
+        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" class="w-11 h-11 mt-4">
       </a>
       <p class="mt-4 text-[10px] font-medium uppercase tracking-[0.25em] text-muted">
-        Carnet de recherche <span class="mx-1.5">·</span> Ingénierie financière du cinéma
+        <span class="whitespace-nowrap">Carnet de recherche</span> <span class="mx-1.5">·</span> <span class="whitespace-nowrap">Ingénierie financière du cinéma</span>
       </p>
     </div>
 
@@ -188,10 +234,9 @@
       </header>
 
       <!-- ✏️ À MODIFIER : L'IMAGE D'EN-TÊTE (facultatif — supprimez le bloc <figure> si inutile).
-           Pour une photo : placez-la dans le dossier images/ et changez le src.
-           Elle s'affiche en noir et blanc ; retirez "grayscale" pour la garder en couleur. -->
+           Pour une photo : placez-la dans le dossier images/ et changez le src. -->
       <figure class="max-w-4xl mx-auto mt-12">
-        <img src="images/ingenierie-financiere.svg" alt="" class="w-full aspect-[16/9] object-cover grayscale">
+        <img src="images/ingenierie-financiere.svg" alt="" class="w-full aspect-[16/9] object-cover">
         <!-- Légende de l'image (facultatif) -->
         <figcaption class="mt-3 text-center text-xs italic text-muted">Légende de l'image ou crédit photo.</figcaption>
       </figure>
@@ -328,5 +373,12 @@
       </p>
     </div>
   </footer>
+  <!-- JAVASCRIPT — bouton mode clair / sombre (aucune modification nécessaire) -->
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+      var sombre = document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('theme', sombre ? 'dark' : 'light'); } catch (e) {}
+    });
+  </script>
 </body>
 </html>
