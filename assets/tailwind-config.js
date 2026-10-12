@@ -31,6 +31,8 @@ tailwind.config = {
         cream: 'rgb(var(--cream) / <alpha-value>)', // fond des encadrés
       },
       fontFamily: {
+        // Nom du site "Popcorn & Capital" (style affiche de cinéma)
+        display: ['"Bebas Neue"', '"Oswald"', 'Impact', '"Arial Narrow"', 'sans-serif'],
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
         sans:  ['Inter', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
       },
