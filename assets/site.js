@@ -44,7 +44,8 @@
   function dateEnFrancais(iso) {
     var d = new Date(iso + 'T12:00:00');
     if (isNaN(d)) return iso;
-    return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    var texte = d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    return d.getDate() === 1 ? texte.replace(/^1 /, '1er ') : texte;  // « 1er octobre »
   }
 
   function creer(balise, classes, texte) {

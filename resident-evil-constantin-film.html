@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!--
+  ==========================================================================
+  POPCORN & CAPITAL — Étude de cas n°1 : Resident Evil et Constantin Film
+  Publiée le 1er octobre 2026. Déclarée dans contenus.js.
+  Mise en forme : voir assets/style.css (texte, graphique, tableau, définitions).
+  ==========================================================================
+-->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CONFIDENTIALITÉ : NE JAMAIS SUPPRIMER CETTE LIGNE.
+       Elle demande à Google (et aux autres moteurs) de ne pas indexer la page. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Resident Evil et Constantin Film — Popcorn &amp; Capital</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+
+  <!-- POLICES : Bebas Neue (nom du site) + Playfair Display (titres) + Inter (textes) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- TAILWIND CSS via CDN, puis les réglages communs du site (couleurs, mode sombre) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tailwind-config.js"></script>
+
+  <!-- Styles communs (couleurs du mode clair / sombre, mise en forme des textes) -->
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="bg-paper text-ink font-sans">
+
+  <!-- ======================================================================
+       EN-TÊTE : logo, titre et menu (identique sur toutes les pages).
+       ⚠️ Si vous modifiez le menu, faites la même modification dans chaque page.
+       Le lien de la page en cours porte aria-current="page" et "border-ink"
+       (souligné) ; les autres portent "border-transparent".
+       ====================================================================== -->
+  <header class="relative px-5 pt-10 sm:pt-12">
+
+    <!-- BOUTON MODE CLAIR / SOMBRE (le choix est mémorisé par le navigateur) -->
+    <button id="theme-toggle" type="button"
+            class="absolute top-4 right-4 sm:top-6 sm:right-8 flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-muted hover:text-ink hover:border-ink/50 transition-colors"
+            aria-label="Basculer entre le mode clair et le mode sombre">
+      <svg class="w-3.5 h-3.5 dark:hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="w-3.5 h-3.5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <span class="hidden sm:inline dark:sm:hidden">Mode sombre</span>
+      <span class="hidden dark:sm:inline">Mode clair</span>
+    </button>
+
+    <div class="text-center">
+      <!-- LOGO, puis TITRE en dessous (police Bebas Neue, style affiche de cinéma) -->
+      <a href="index.html" class="inline-flex flex-col items-center">
+        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" class="w-16 h-16 mb-3">
+        <span class="font-display uppercase tracking-[0.04em] whitespace-nowrap text-[clamp(2rem,10vw,3rem)] sm:text-6xl leading-none">Popcorn &amp; Capital</span>
+      </a>
+    </div>
+
+    <nav class="max-w-6xl mx-auto mt-8 border-t border-ink border-b" aria-label="Navigation principale">
+      <ul class="flex flex-wrap justify-center gap-x-8 sm:gap-x-14 gap-y-2 py-4 text-[11px] font-medium uppercase tracking-[0.22em]">
+        <li><a href="index.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Accueil</a></li>
+        <li><a href="etudes-de-cas.html" aria-current="page" class="pb-1 border-b border-ink">Études de cas</a></li>
+        <li><a href="fiches-techniques.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Fiches techniques</a></li>
+        <li><a href="a-propos.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">À propos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ======================================================================
+       L'ARTICLE
+       ====================================================================== -->
+  <main class="px-5 py-14 sm:py-20">
+    <article>
+
+      <!-- ================================================================
+           EN-TÊTE DE L'ARTICLE
+           ================================================================ -->
+      <header class="max-w-3xl mx-auto text-center">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em]">
+          Étude de cas <span class="mx-1.5 text-muted">·</span> Ingénierie financière
+        </p>
+
+        <h1 class="mt-6 font-serif text-4xl sm:text-6xl leading-[1.1]">
+          Resident Evil et Constantin Film
+        </h1>
+
+        <!-- Chapeau : la phrase qui donne envie de lire -->
+        <p class="mt-6 font-serif italic text-xl sm:text-2xl leading-snug text-ink/80">
+          Six films éreintés par la critique, et un studio qui n'a jamais tremblé.
+          Comment l'argent a tenu la franchise debout pendant vingt ans, et ce que
+          le reboot de 2026 a changé à la recette.
+        </p>
+
+        <p class="mt-6 text-[11px] uppercase tracking-[0.25em] text-muted">
+          <time datetime="2026-10-01">1<sup>er</sup> octobre 2026</time>
+          <span class="mx-2">·</span> Édition n°1
+          <span class="mx-2">·</span> 7 min de lecture
+        </p>
+
+        <div class="mt-6 flex flex-wrap justify-center gap-2">
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Medienfonds</span>
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Transfert de risque</span>
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Coproduction</span>
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Minimum garanti</span>
+        </div>
+      </header>
+
+      <figure class="max-w-4xl mx-auto mt-12">
+        <img src="images/resident-evil.svg" alt="Une seringue remplie d'un liquide vert tombe au sol, dans le noir." class="w-full aspect-[16/9] object-cover">
+        <figcaption class="mt-3 text-center text-xs italic text-muted">La seringue de la dernière scène. Illustration : Popcorn &amp; Capital.</figcaption>
+      </figure>
+
+      <div class="max-w-2xl mx-auto">
+
+        <!-- TL;DR -->
+        <aside class="mt-14 bg-cream px-7 sm:px-10 py-8">
+          <p class="text-center text-[11px] font-semibold uppercase tracking-[0.3em]">TL;DR — L'essentiel</p>
+          <div class="mx-auto mt-3 mb-6 w-10 border-t border-ink"></div>
+          <ul class="space-y-3 text-[15px] leading-relaxed text-ink/85">
+            <li class="flex gap-3"><span class="font-serif font-bold">2002</span><span>Constantin fait financer le premier film par des fonds allemands défiscalisés. Ce sont les investisseurs qui prennent le risque, et le fisc qui les récompense.</span></li>
+            <li class="flex gap-3"><span class="font-serif font-bold">2021</span><span>Le budget fond de 40 à 25&nbsp;M$ juste avant le tournage. Le film rapporte 1,7 fois sa mise : trop peu pour payer aussi sa promotion.</span></li>
+            <li class="flex gap-3"><span class="font-serif font-bold">2026</span><span>Droits vendus aux enchères, trois coproducteurs, un réalisateur qui rassure : 75&nbsp;M$ de budget et déjà 2,6 fois la mise.</span></li>
+          </ul>
+        </aside>
+
+        <!-- ================================================================
+             CORPS DE L'ARTICLE
+             ================================================================ -->
+        <div class="article-body mt-14">
+
+          <p>
+            Avant 2026, Resident Evil ne m'avait laissé aucun souvenir. J'avais croisé un
+            ancien volet sans rien en retenir, et quelques let's play du jeu m'avaient suffi
+            pour sentir que les films trahissaient leur modèle. Je n'y avais pourtant jamais joué.
+          </p>
+
+          <p>
+            Puis le reboot de Zach Cregger est sorti, et j'ai eu peur. Vraiment peur. Le soir
+            même, j'ai lancé <em>Welcome to Raccoon City</em> (2021) pour comparer. Aucun suspense,
+            des effets spéciaux qui ont mal vieilli, pas une scène qui reste. En reprenant
+            <em>Resident Evil Village</em> manette en main, j'ai compris une partie de l'écart :
+            plusieurs plans du film de 2026 filment presque comme le jeu, à hauteur du joueur.
+            Les anciens films n'y avaient jamais pensé. Et la dernière scène, une seringue qui
+            tombe au sol, prépare déjà la suite.
+          </p>
+
+          <p>
+            Une question m'a suivi en sortant de la salle. Pourquoi Constantin Film, le studio
+            allemand qui détient les droits, a-t-il continué à produire des Resident Evil pendant
+            vingt ans alors que la critique les détestait&nbsp;? La réponse n'est pas dans les films.
+            Elle est dans la façon dont ils ont été payés.
+          </p>
+
+          <h2>2002 : faire porter le risque par quelqu'un d'autre</h2>
+
+          <p>
+            Produire un film, c'est dépenser tout son argent avant de savoir si le public viendra.
+            C'est le risque de base du métier. Constantin a trouvé un moyen de ne pas le porter seul.
+          </p>
+
+          <p>
+            Pour le premier film, le studio passe par les <strong>Medienfonds</strong>, des fonds
+            d'investissement allemands très en vogue au début des années 2000. Des particuliers y
+            placent de l'argent et le déduisent de leurs impôts. Leur gain vient surtout de cette
+            réduction d'impôt, que le film marche ou non.
+          </p>
+
+          <p>
+            <strong>En clair</strong>, imaginez que vous ouvrez un restaurant avec l'argent de vos
+            voisins, et que l'État leur rend une bonne partie de leur mise en baisse d'impôts.
+            Si la salle reste vide, vous n'avez presque rien risqué. Vos voisins non plus, en fait.
+            C'est le fisc qui a payé l'addition.
+          </p>
+
+          <p>
+            Résultat : le <strong>négatif</strong>, c'est-à-dire tout ce que coûte la fabrication
+            du film, sans la promotion, est couvert avant même la sortie en salle. Le studio a
+            <strong>transféré son risque</strong> à d'autres. C'est pour ça que la franchise a pu
+            enchaîner six films démolis par la critique sans jamais mettre Constantin en danger.
+            L'argent était sécurisé avant le premier ticket vendu. (Et ces films ont plutôt bien
+            marché en salle, ce qui n'a rien gâché.)
+          </p>
+
+          <p>
+            Retenez un détail pour la fin : l'Allemagne a fini par fermer cette niche fiscale au
+            milieu des années 2000.
+          </p>
+
+          <h2>2021 : quand les financeurs n'y croient plus</h2>
+
+          <p>
+            <em>Welcome to Raccoon City</em> devait coûter 40&nbsp;M$. Juste avant le tournage,
+            le budget tombe à 25&nbsp;M$. C'est 37&nbsp;% de moins.
+          </p>
+
+          <p>
+            Dans le financement de films, une coupe pareille à ce moment-là est un signal d'alarme.
+            Les financeurs n'annulent pas le projet, ils réduisent leur mise, parce qu'ils ne croient
+            plus assez au retour. Moins d'argent, c'est moins de jours de tournage, moins d'effets,
+            moins de marge pour bien faire. Et ça se voit à l'écran.
+          </p>
+
+          <p>
+            Le film rapporte 42&nbsp;M$ dans le monde pour 25&nbsp;M$ de budget, soit 1,7 fois sa
+            mise. Dit comme ça, il a gagné de l'argent. En réalité, non.
+          </p>
+
+          <h3>Pourquoi il faut viser au moins 2,5 fois le budget</h3>
+
+          <p>
+            Les recettes affichées au box-office ne vont pas au studio. Les salles en gardent
+            environ la moitié (la part varie selon les pays). Il faut ensuite payer la sortie du
+            film : affiches, bandes-annonces, publicité, copies. C'est le
+            <strong>P&amp;A</strong>, pour <em>prints &amp; advertising</em>, et il n'est pas
+            compté dans le budget annoncé. Pour un film de studio, il peut approcher le coût du
+            film lui-même.
+          </p>
+
+          <p>
+            D'où la règle que tout le monde utilise dans le métier : un film commence vraiment à
+            rapporter quand ses recettes mondiales atteignent environ <strong>2,5 fois son
+            budget</strong>. À 1,7, <em>Welcome to Raccoon City</em> n'est pas une catastrophe.
+            Il ne rembourse simplement pas tout ce qu'il a coûté.
+          </p>
+
+          <!-- Graphique : recettes ÷ budget, avec le seuil de 2,5 en pointillé -->
+          <figure class="graphe" aria-labelledby="graphe-re-titre">
+            <p class="graphe-titre" id="graphe-re-titre">Combien chaque film a rapporté</p>
+            <p class="graphe-sous-titre">Recettes mondiales divisées par le budget. En pointillé, le seuil d'environ 2,5 à partir duquel un film devient vraiment rentable.</p>
+            <div class="graphe-lignes" style="--max: 3.5; --seuil: 2.5">
+              <div class="graphe-ligne" aria-hidden="true">
+                <span></span>
+                <span class="graphe-piste"><span class="graphe-legende-seuil">seuil ≈ x2,5</span></span>
+              </div>
+              <div class="graphe-ligne" style="--v: 3.1" title="Resident Evil (2002) : 103 M$ de recettes pour 33 M$ de budget">
+                <span class="graphe-nom">Resident Evil (2002)</span>
+                <span class="graphe-piste"><span class="graphe-barre"></span><span class="graphe-chiffre">x3,1</span></span>
+              </div>
+              <div class="graphe-ligne" style="--v: 1.7" title="Welcome to Raccoon City (2021) : 42 M$ de recettes pour 25 M$ de budget">
+                <span class="graphe-nom">Welcome to Raccoon City (2021)</span>
+                <span class="graphe-piste"><span class="graphe-barre"></span><span class="graphe-chiffre">x1,7</span></span>
+              </div>
+              <div class="graphe-ligne" style="--v: 2.6" title="Resident Evil (2026) : 196,5 M$ de recettes pour 75 M$ de budget, chiffre provisoire">
+                <span class="graphe-nom">Resident Evil (2026)</span>
+                <span class="graphe-piste"><span class="graphe-barre"></span><span class="graphe-chiffre">x2,6</span></span>
+              </div>
+            </div>
+          </figure>
+
+          <div class="tableau">
+            <table>
+              <thead>
+                <tr><th>Film</th><th>Budget</th><th>Recettes mondiales</th><th>Recettes ÷ budget</th><th>Letterboxd</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Resident Evil (2002)</td><td>33&nbsp;M$</td><td>103&nbsp;M$</td><td>x3,1</td><td>2,94 / 5</td></tr>
+                <tr><td>Welcome to Raccoon City (2021)</td><td>25&nbsp;M$ <span class="text-muted">(au lieu de 40)</span></td><td>42&nbsp;M$</td><td>x1,7</td><td>2,04 / 5</td></tr>
+                <tr><td>Resident Evil (2026)</td><td>75&nbsp;M$</td><td>196,5&nbsp;M$ <span class="text-muted">(encore en salle)</span></td><td>x2,6</td><td>3,78 / 5</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Regardez la dernière colonne : les notes du public suivent la même pente que l'argent.
+            Le film le plus solidement financé est aussi, de loin, celui que les spectateurs préfèrent.
+          </p>
+
+          <h2>2026 : trois choses qui changent tout</h2>
+
+          <h3>Les droits partent aux enchères</h3>
+
+          <p>
+            En mars 2025, Sony doit se battre contre Warner Bros. et Netflix pour obtenir les
+            droits de distribution du film. Pour gagner, il faut mettre sur la table un
+            <strong>minimum garanti</strong> plus élevé : la somme que le distributeur s'engage à
+            verser au producteur quoi qu'il arrive, avant même de toucher sa part des recettes.
+          </p>
+
+          <p>
+            Quand trois géants se disputent un film, ce film change de statut. Ce n'est plus un
+            pari qu'on essaie de sécuriser, c'est un actif que tout le monde veut avoir.
+          </p>
+
+          <h3>Trois coproducteurs au lieu d'un seul</h3>
+
+          <p>
+            Le financement est partagé entre Constantin, PlayStation Productions et Vertigo
+            Entertainment. Chacun paie une part du négatif et récupère la même part des recettes.
+            En finance, on appelle ça un partage de risque en <strong>equity</strong> (en fonds
+            propres) : chacun devient copropriétaire du film, avec ses gains et ses pertes.
+          </p>
+
+          <p>
+            Le budget monte à 75&nbsp;M$, trois fois celui de 2021. Mais si le film se plante,
+            la perte est répartie entre trois entreprises au lieu d'une.
+          </p>
+
+          <h3>Un réalisateur qui rassure</h3>
+
+          <p>
+            Zach Cregger arrive avec le carton de <em>Weapons</em> (2025). Dans le jargon, on parle
+            d'<strong>attachment</strong> : quand un talent qui a déjà prouvé qu'il remplit les
+            salles s'engage sur un projet, les financeurs demandent une prime de risque plus
+            faible. Ils prêtent ou investissent à des conditions plus douces, exactement comme
+            avec une grande star.
+          </p>
+
+          <p>
+            Un réalisateur <strong>bankable</strong>, c'est donc un argument artistique et un
+            argument financier en même temps.
+          </p>
+
+          <h2>Ce qu'il faut retenir</h2>
+
+          <p>
+            En 2026, le studio n'achète plus simplement « un Resident Evil ». Il monte une opération
+            où le risque est partagé entre plusieurs financeurs et réduit par un réalisateur qui
+            inspire confiance. En chiffres : 2,6 fois la mise sur 75&nbsp;M$ de budget, contre 1,7
+            en 2021, et le film est encore en salle.
+          </p>
+
+          <p>
+            Vous vous souvenez de la niche fiscale allemande refermée&nbsp;? En 2002, la franchise
+            avait besoin d'elle pour exister. En 2026, elle s'en passe très bien. Elle a appris à
+            répartir son risque entre partenaires, là où elle le faisait autrefois payer au fisc.
+          </p>
+
+          <hr>
+
+          <h2>Les mots de l'article</h2>
+
+          <dl>
+            <div><dt>Négatif</dt><dd>Le coût de fabrication d'un film : tournage, décors, effets, montage. Sans la promotion.</dd></div>
+            <div><dt>Medienfonds</dt><dd>Fonds allemands dans lesquels des particuliers investissaient dans des films en échange d'avantages fiscaux.</dd></div>
+            <div><dt>Transfert de risque</dt><dd>Faire porter à quelqu'un d'autre la perte possible d'un projet.</dd></div>
+            <div><dt>P&amp;A (prints &amp; advertising)</dt><dd>Le budget pour sortir un film en salle : publicité, bandes-annonces, affiches, copies.</dd></div>
+            <div><dt>Multiple (x2,5)</dt><dd>Les recettes mondiales divisées par le budget. Autour de 2,5, un film commence à être rentable.</dd></div>
+            <div><dt>Minimum garanti</dt><dd>La somme qu'un distributeur verse au producteur quoi qu'il arrive, avant de toucher sa part des recettes.</dd></div>
+            <div><dt>Equity (fonds propres)</dt><dd>Financer un projet en devenant copropriétaire : on partage les gains comme les pertes.</dd></div>
+            <div><dt>Attachment</dt><dd>L'engagement d'un réalisateur ou d'une star sur un projet, qui rassure les financeurs.</dd></div>
+            <div><dt>Bankable</dt><dd>Se dit d'un talent dont le nom suffit à faciliter le financement d'un film.</dd></div>
+          </dl>
+        </div>
+
+        <!-- Sources & notes -->
+        <section class="mt-16 border-t border-ink pt-6 text-sm text-muted space-y-2">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-ink mb-3">Sources &amp; notes</p>
+          <!-- ✏️ À COMPLÉTER : une source par ligne <p> ... </p> (Box Office Mojo, Deadline, Variety...) -->
+          <p>Budgets et recettes mondiales tels que publiés par la presse spécialisée. Recettes 2026 provisoires, le film est encore en salle.</p>
+          <p>Notes Letterboxd relevées le 1<sup>er</sup> octobre 2026.</p>
+        </section>
+
+        <p class="mt-14 text-center">
+          <a href="index.html" class="text-[11px] font-medium uppercase tracking-[0.25em] border-b border-ink pb-1 hover:text-muted transition-colors">
+            ← Retour au carnet
+          </a>
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <!-- ======================================================================
+       PIED DE PAGE : mention de confidentialité (identique sur toutes les pages)
+       ====================================================================== -->
+  <footer class="px-5 pb-12">
+    <div class="max-w-6xl mx-auto border-t-[5px] border-double border-ink pt-8 flex flex-col items-center gap-3 text-center">
+      <p class="font-display uppercase tracking-[0.04em] text-2xl">Popcorn &amp; Capital</p>
+      <p class="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.25em] text-muted">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+        Carnet de recherche privé — Ne pas partager
+      </p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT : bouton mode clair / sombre -->
+  <script src="assets/site.js"></script>
+</body>
+</html>

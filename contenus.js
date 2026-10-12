@@ -34,6 +34,14 @@ var CONTENUS = [
 
   // ▼▼▼ AJOUTER UN NOUVEAU CONTENU ICI (copiez-collez un bloc ci-dessous) ▼▼▼
 
+  {
+    type: "etude-de-cas",
+    titre: "Resident Evil et Constantin Film",
+    date: "2026-10-01",
+    lien: "resident-evil-constantin-film.html",
+    image: "images/resident-evil.svg",
+  },
+
   // ---------- EXEMPLES : à remplacer ou supprimer au fur et à mesure ----------
 
   {
