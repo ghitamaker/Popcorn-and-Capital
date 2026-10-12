@@ -2,7 +2,7 @@
   LOGO POPCORN & CAPITAL
   Un ticket de cinéma rouge : sur la partie principale, une pellicule dont les
   images forment des barres qui montent (le cinéma + la finance) ; sur le talon
-  doré qu'on détache, un pot de pop-corn.
+  doré qu'on détache, un bouton lecture.
   Ce fichier sert à la fois de logo (dans l'en-tête) et d'icône d'onglet (favicon).
   ⚠️ Il doit rester dans le même dossier que les pages .html.
 -->
@@ -29,11 +29,7 @@
     <rect x="15.25" y="22.8" width="4" height="6.2" fill="#F2B544" opacity=".8"/>
     <rect x="21.25" y="19.6" width="4" height="9.4" fill="#F2B544"/>
 
-    <!-- Pot de pop-corn sur le talon -->
-    <g stroke="#26221E" stroke-width=".55">
-      <circle cx="34.3" cy="21.7" r="1.35" fill="#FBEFD9"/><circle cx="36.9" cy="21.7" r="1.35" fill="#FBEFD9"/><circle cx="35.6" cy="20.6" r="1.45" fill="#FBEFD9"/>
-      <path d="M33.1 22.6 H38.1 L37.3 28.6 H33.9 Z" fill="#C8503F" stroke-linejoin="round"/>
-    </g>
-    <path d="M35.6 22.9 V28.3" stroke="#FBEFD9" stroke-width=".9"/>
+    <!-- Bouton lecture sur le talon -->
+    <polygon points="34,20.4 38.4,24 34,27.6" fill="#26221E" stroke="#26221E" stroke-width=".8" stroke-linejoin="round"/>
   </g>
 </svg>
