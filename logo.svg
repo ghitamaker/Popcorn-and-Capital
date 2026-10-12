@@ -1,32 +1,34 @@
 <!--
   LOGO POPCORN & CAPITAL
-  Un clap de cinéma dont l'ardoise affiche un graphique boursier en hausse.
+  Un ticket de cinéma rouge dont la partie principale affiche un graphique
+  boursier en hausse, et dont le talon (partie détachable, dorée) porte le signe €.
   Ce fichier sert à la fois de logo (dans l'en-tête) et d'icône d'onglet (favicon).
   ⚠️ Il doit rester dans le même dossier que les pages .html.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
   <defs>
-    <linearGradient id="pc-grad" x1="6" y1="42" x2="42" y2="18" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#EF5B4C"/>
-      <stop offset="1" stop-color="#F2B544"/>
-    </linearGradient>
+    <!-- Forme du ticket : coins arrondis + une encoche de chaque côté -->
+    <path id="pc-ticket" d="M8 12 H40 A4 4 0 0 1 44 16 V20 A4 4 0 0 0 44 28 V32 A4 4 0 0 1 40 36 H8 A4 4 0 0 1 4 32 V28 A4 4 0 0 0 4 20 V16 A4 4 0 0 1 8 12 Z"/>
+    <clipPath id="pc-clip"><use href="#pc-ticket"/></clipPath>
   </defs>
 
-  <!-- Claquette (partie haute du clap), légèrement ouverte -->
-  <g transform="rotate(-12 6 17)">
-    <rect x="6" y="9" width="36" height="7" rx="1.5" fill="#F2B544"/>
-    <path d="M13 9h5l-4 7h-5z M23 9h5l-4 7h-5z M33 9h5l-4 7h-5z" fill="#26221E"/>
+  <!-- Le ticket, légèrement incliné -->
+  <g transform="translate(24 24) rotate(-10) scale(1.12) translate(-24 -24)">
+    <!-- Corps du ticket (rouge cinéma) -->
+    <use href="#pc-ticket" fill="#C8503F"/>
+    <!-- Talon détachable (doré) -->
+    <rect x="31" y="12" width="13" height="24" fill="#F2B544" clip-path="url(#pc-clip)"/>
+    <!-- Pointillés de découpe -->
+    <line x1="31" y1="13.5" x2="31" y2="34.5" stroke="#FBEFD9" stroke-width="1.2" stroke-dasharray="2 1.6"/>
+
+    <!-- Graphique boursier : barres + courbe en hausse avec flèche -->
+    <rect x="8.5" y="27" width="3" height="5"  rx=".6" fill="#FBEFD9" opacity=".5"/>
+    <rect x="13.5" y="24" width="3" height="8"  rx=".6" fill="#FBEFD9" opacity=".7"/>
+    <rect x="18.5" y="21" width="3" height="11" rx=".6" fill="#FBEFD9" opacity=".9"/>
+    <polyline points="7.5,25 13.5,20.5 18.5,22.5 27,15.5" stroke="#F2B544" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="23.3,15.5 27,15.5 27,19.2" stroke="#F2B544" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Signe € sur le talon -->
+    <text x="35.6" y="27.4" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="9" font-weight="bold" fill="#26221E">€</text>
   </g>
-
-  <!-- Ardoise (corps du clap) -->
-  <rect x="6" y="18" width="36" height="24" rx="3" fill="#26221E" stroke="url(#pc-grad)" stroke-width="2"/>
-
-  <!-- Barres du graphique -->
-  <rect x="12" y="33" width="4" height="5" rx="1" fill="#3CC8B4" opacity=".55"/>
-  <rect x="19" y="30" width="4" height="8" rx="1" fill="#3CC8B4" opacity=".75"/>
-  <rect x="26" y="27" width="4" height="11" rx="1" fill="#3CC8B4"/>
-
-  <!-- Courbe en hausse + flèche -->
-  <polyline points="11,31 18,26 25,28 36,21" stroke="url(#pc-grad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <polyline points="31.5,21 36,21 36,25.5" stroke="#F2B544" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
