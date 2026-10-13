@@ -56,29 +56,32 @@
   }
 
   // Fabrique une carte : image + étiquette + titre + type et date
+  // (contenu à venir : carte non cliquable, marquée « Bientôt disponible »)
   function carte(c) {
     var article = creer('article');
-    var lien = creer('a', 'group block');
-    lien.href = c.lien;
+    var lien = c.bientot ? creer('div', 'block') : creer('a', 'group block');
+    if (!c.bientot) lien.href = c.lien;
 
     var cadre = creer('div', 'relative overflow-hidden');
     var img = creer('img', 'w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105');
     img.src = c.image || 'images/etudes-de-cas.svg';
     img.alt = '';
     img.loading = 'lazy';
-    var etiquette = c.etiquette || (c.genre ? 'Fiche · ' + c.genre : NOMS_TYPE[c.type] || '');
+    if (c.bientot) img.className += ' opacity-60';
+    var etiquette = c.bientot ? 'Bientôt disponible'
+      : c.etiquette || (c.genre ? 'Fiche · ' + c.genre : NOMS_TYPE[c.type] || '');
     cadre.append(img, creer('span',
       'absolute bottom-0 left-1/2 -translate-x-1/2 bg-paper px-6 pt-3 pb-2 text-[10px] font-medium uppercase tracking-[0.25em] whitespace-nowrap',
       etiquette));
 
     var titre = creer('h3',
-      'mt-5 px-4 text-center font-serif text-2xl leading-snug group-hover:underline underline-offset-4 decoration-1',
-      c.titre);
+      'mt-5 px-4 text-center font-serif text-2xl leading-snug' +
+      (c.bientot ? ' text-ink/60' : ' group-hover:underline underline-offset-4 decoration-1'));
     // Espaces insécables avant ? ! : ; (typographie française)
     titre.textContent = (c.titre || '').replace(/ ([?!:;])/g, ' $1');
 
     var meta = creer('p', 'mt-2 text-center text-[11px] uppercase tracking-[0.2em] text-muted',
-      (NOMS_TYPE[c.type] || '') + ' · ' + dateEnFrancais(c.date));
+      (NOMS_TYPE[c.type] || '') + ' · ' + (c.bientot ? 'À venir' : dateEnFrancais(c.date)));
 
     lien.append(cadre, titre, meta);
     article.append(lien);
@@ -86,16 +89,20 @@
   }
 
   function afficher() {
-    var liste = contenus
-      .filter(function (c) { return !genre || c.genre === genre; })
-      .slice()
-      .sort(function (a, b) {
-        return ordre === 'recent' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date);
-      });
+    var choisis = contenus.filter(function (c) { return !genre || c.genre === genre; });
+    // Les contenus publiés sont triés par date ; ceux à venir passent toujours après.
+    var publies = choisis.filter(function (c) { return !c.bientot; }).sort(function (a, b) {
+      return ordre === 'recent' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date);
+    });
+    var aVenir = choisis.filter(function (c) { return c.bientot; });
+    var liste = publies.concat(aVenir);
 
     grille.replaceChildren.apply(grille, liste.map(carte));
     if (vide) vide.hidden = liste.length > 0;
-    if (compteur) compteur.textContent = liste.length + (liste.length > 1 ? ' contenus' : ' contenu');
+    if (compteur) {
+      compteur.textContent = publies.length + (publies.length > 1 ? ' contenus publiés' : ' contenu publié') +
+        (aVenir.length ? ' · ' + aVenir.length + ' à venir' : '');
+    }
 
     boutonsTri.forEach(function (b) {
       b.setAttribute('aria-pressed', b.dataset.ordre === ordre ? 'true' : 'false');

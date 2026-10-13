@@ -25,6 +25,11 @@
                     Si vous l'omettez, le type s'affiche à la place.
         genre     : (fiches techniques uniquement) "Schéma", "Résumé",
                     "Définition" ou "Explication" — sert de filtre dans l'onglet.
+        bientot   : true → contenu annoncé mais pas encore écrit : la carte
+                    affiche « Bientôt disponible », n'est pas cliquable et se
+                    range après les contenus publiés. Pas besoin de lien ni de date.
+                    Quand le contenu est prêt : supprimez cette ligne et
+                    ajoutez son lien et sa date.
 
    ⚠️ Gardez bien les guillemets "..." autour des textes. Si un titre contient
       lui-même des guillemets, utilisez « ... » à la place.
@@ -42,13 +47,12 @@ var CONTENUS = [
     image: "images/resident-evil.svg",
   },
 
-  // ---------- EXEMPLES : à remplacer ou supprimer au fur et à mesure ----------
+  // ---------- À VENIR : contenus annoncés, pas encore écrits ----------
 
   {
     type: "article",
     titre: "Ce que le box-office ne dit pas",
-    date: "2026-09-30",
-    lien: "template-article.html",
+    bientot: true,
     image: "images/data-strategie.svg",
     etiquette: "Data & Stratégie",
   },
@@ -56,8 +60,7 @@ var CONTENUS = [
   {
     type: "etude-de-cas",
     titre: "Anatomie du plan de financement d'un film d'auteur",
-    date: "2026-09-26",
-    lien: "template-article.html",
+    bientot: true,
     image: "images/etudes-de-cas.svg",
   },
 
@@ -65,8 +68,7 @@ var CONTENUS = [
     type: "fiche-technique",
     genre: "Schéma",
     titre: "La remontée des recettes, du guichet au producteur",
-    date: "2026-09-22",
-    lien: "template-fiche.html",
+    bientot: true,
     image: "images/ticket.svg",
   },
 
@@ -74,24 +76,21 @@ var CONTENUS = [
     type: "fiche-technique",
     genre: "Définition",
     titre: "Gap financing : la définition",
-    date: "2026-09-18",
-    lien: "template-fiche.html",
+    bientot: true,
     image: "images/ingenierie-financiere.svg",
   },
 
   {
     type: "etude-de-cas",
     titre: "Le pop-corn, vraie économie des salles ?",
-    date: "2026-09-12",
-    lien: "template-article.html",
+    bientot: true,
     image: "images/popcorn.svg",
   },
 
   {
     type: "article",
     titre: "Préventes : vendre un film avant qu'il existe",
-    date: "2026-09-05",
-    lien: "template-article.html",
+    bientot: true,
     image: "images/camera.svg",
     etiquette: "Ingénierie financière",
   },
