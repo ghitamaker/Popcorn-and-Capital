@@ -174,3 +174,6 @@ body {
 .article-body .tableau { overflow-x: auto; }
 .article-body .tableau table { min-width: 34rem; }
 .article-body .tableau td:not(:first-child), .article-body .tableau th:not(:first-child) { font-variant-numeric: tabular-nums; }
+
+/* Bouton-lien dans un texte : <a class="bouton" href="...">Texte</a> (sans soulignement) */
+.article-body a.bouton { text-decoration: none; }
