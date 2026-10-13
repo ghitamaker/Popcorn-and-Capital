@@ -177,3 +177,7 @@ body {
 
 /* Bouton-lien dans un texte : <a class="bouton" href="...">Texte</a> (sans soulignement) */
 .article-body a.bouton { text-decoration: none; }
+
+/* Lexique : quand on clique sur un mot de l'article, sa définition est mise en évidence */
+.article-body dl > div { scroll-margin-top: 2rem; transition: background-color .4s; }
+.article-body dl > div:target { background: rgb(var(--cream)); padding-inline: .75rem; }
