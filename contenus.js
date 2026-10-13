@@ -48,51 +48,57 @@ var CONTENUS = [
   },
 
   // ---------- À VENIR : contenus annoncés, pas encore écrits ----------
+  // (ils s'affichent dans cet ordre, après les contenus publiés)
 
   {
-    type: "article",
-    titre: "Ce que le box-office ne dit pas",
+    type: "etude-de-cas",
+    titre: "A24 : le petit studio qui a fait de l'indé une marque",
+    image: "images/etudes-de-cas.svg",
     bientot: true,
-    image: "images/data-strategie.svg",
-    etiquette: "Data & Stratégie",
   },
 
   {
     type: "etude-de-cas",
-    titre: "Anatomie du plan de financement d'un film d'auteur",
+    titre: "Obsession et Blumhouse : la peur à petit budget, une machine à cash",
+    image: "images/blumhouse.svg",
     bientot: true,
-    image: "images/etudes-de-cas.svg",
+  },
+
+  {
+    type: "article",
+    titre: "Ton ticket de ciné : qui empoche vraiment l'argent ?",
+    image: "images/ticket.svg",
+    bientot: true,
   },
 
   {
     type: "fiche-technique",
-    genre: "Schéma",
-    titre: "La remontée des recettes, du guichet au producteur",
+    genre: "Explication",
+    titre: "Les Sofica : financer le cinéma français et payer moins d'impôts",
+    image: "images/ingenierie-financiere.svg",
     bientot: true,
-    image: "images/ticket.svg",
+  },
+
+  {
+    type: "article",
+    titre: "Box-office : pourquoi un carton peut quand même perdre de l'argent",
+    image: "images/data-strategie.svg",
+    bientot: true,
   },
 
   {
     type: "fiche-technique",
     genre: "Définition",
-    titre: "Gap financing : la définition",
-    bientot: true,
-    image: "images/ingenierie-financiere.svg",
-  },
-
-  {
-    type: "etude-de-cas",
-    titre: "Le pop-corn, vraie économie des salles ?",
-    bientot: true,
+    titre: "Gap financing : combler le dernier trou du budget",
     image: "images/popcorn.svg",
+    bientot: true,
   },
 
   {
     type: "article",
     titre: "Préventes : vendre un film avant qu'il existe",
-    bientot: true,
     image: "images/camera.svg",
-    etiquette: "Ingénierie financière",
+    bientot: true,
   },
 
 ];
