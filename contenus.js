@@ -42,7 +42,7 @@ var CONTENUS = [
   {
     type: "fiche-technique",
     genre: "Explication",
-    titre: "Les Sofica : quand tes impôts financent le cinéma français",
+    titre: "Les Sofica : quand des particuliers financent le cinéma français",
     date: "2026-10-24",
     lien: "sofica.html",
     image: "images/ingenierie-financiere.svg",
