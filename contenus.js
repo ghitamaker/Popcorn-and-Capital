@@ -40,6 +40,15 @@ var CONTENUS = [
   // ▼▼▼ AJOUTER UN NOUVEAU CONTENU ICI (copiez-collez un bloc ci-dessous) ▼▼▼
 
   {
+    type: "fiche-technique",
+    genre: "Explication",
+    titre: "Les Sofica : quand tes impôts financent le cinéma français",
+    date: "2026-10-24",
+    lien: "sofica.html",
+    image: "images/ingenierie-financiere.svg",
+  },
+
+  {
     type: "etude-de-cas",
     titre: "Resident Evil et Constantin Film",
     date: "2026-10-01",
@@ -68,14 +77,6 @@ var CONTENUS = [
     type: "article",
     titre: "Ton ticket de ciné : qui empoche vraiment l'argent ?",
     image: "images/ticket.svg",
-    bientot: true,
-  },
-
-  {
-    type: "fiche-technique",
-    genre: "Explication",
-    titre: "Les Sofica : financer le cinéma français et payer moins d'impôts",
-    image: "images/ingenierie-financiere.svg",
     bientot: true,
   },
 
