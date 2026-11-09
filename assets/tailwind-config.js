@@ -4,7 +4,8 @@
    Ce fichier est chargé dans le <head> de chaque page, juste après Tailwind.
    Il contient :
      1. le choix du mode clair / sombre (appliqué avant l'affichage)
-     2. la configuration de Tailwind (polices et couleurs)
+     2. le choix de la langue (appliqué avant l'affichage)
+     3. la configuration de Tailwind (polices et couleurs)
    Les COULEURS elles-mêmes se règlent dans assets/style.css.
    ========================================================================== */
 
@@ -18,7 +19,20 @@
   }
 })();
 
-// 2. CONFIGURATION DE TAILWIND
+// 2. LANGUE : reprend le dernier choix du lecteur (français par défaut).
+//    Masque tout de suite les blocs data-lang des autres langues, pour éviter
+//    que la version française n'apparaisse une fraction de seconde.
+(function () {
+  var langue = 'fr';
+  try { langue = localStorage.getItem('langue') || 'fr'; } catch (e) {}
+  if (['fr', 'en'].indexOf(langue) === -1) langue = 'fr';
+  document.documentElement.lang = langue;
+  var style = document.createElement('style');
+  style.textContent = '[data-lang]:not([data-lang="' + langue + '"]):not(.lang-repli){display:none!important}';
+  document.head.appendChild(style);
+})();
+
+// 3. CONFIGURATION DE TAILWIND
 tailwind.config = {
   darkMode: 'class', // le mode sombre s'active avec la classe "dark" sur <html>
   theme: {
