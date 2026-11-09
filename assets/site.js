@@ -52,11 +52,23 @@
       b.addEventListener('click', function () {
         if (l.code === langue) return;
         try { localStorage.setItem('langue', l.code); } catch (e) {}
-        location.reload();
+        var url = new URL(location.href);
+        url.searchParams.set('lang', l.code);
+        location.href = url.href;
       });
       zoneLangue.append(b);
     });
   }
+
+  // La langue suit dans les liens internes (…/sofica.html?lang=en), pour
+  // qu'elle soit gardée même si le navigateur ne mémorise rien.
+  document.querySelectorAll('a[href]').forEach(function (a) {
+    var href = a.getAttribute('href');
+    if (/^[a-z0-9-]+\.html(#.*)?$/i.test(href)) {
+      var morceaux = href.split('#');
+      a.setAttribute('href', morceaux[0] + '?lang=' + langue + (morceaux[1] ? '#' + morceaux[1] : ''));
+    }
+  });
 
   if (langue !== 'fr') {
     // Textes communs : data-t="cle" (contenu), data-t-aria, data-t-alt
@@ -153,7 +165,7 @@
   function carte(c) {
     var article = creer('article');
     var lien = c.bientot ? creer('div', 'block') : creer('a', 'group block');
-    if (!c.bientot) lien.href = c.lien;
+    if (!c.bientot) lien.href = c.lien + '?lang=' + langue;
 
     var cadre = creer('div', 'relative overflow-hidden');
     var img = creer('img', 'w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105');

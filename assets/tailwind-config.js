@@ -23,8 +23,15 @@
 //    Masque tout de suite les blocs data-lang des autres langues, pour éviter
 //    que la version française n'apparaisse une fraction de seconde.
 (function () {
-  var langue = 'fr';
-  try { langue = localStorage.getItem('langue') || 'fr'; } catch (e) {}
+//    La langue peut aussi être donnée dans l'adresse : ...index.html?lang=en
+//    (pratique pour envoyer directement la version anglaise à quelqu'un).
+  var langue = null;
+  try { langue = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  if (langue) {
+    try { localStorage.setItem('langue', langue); } catch (e) {}
+  } else {
+    try { langue = localStorage.getItem('langue'); } catch (e) {}
+  }
   if (['fr', 'en'].indexOf(langue) === -1) langue = 'fr';
   document.documentElement.lang = langue;
   var style = document.createElement('style');
