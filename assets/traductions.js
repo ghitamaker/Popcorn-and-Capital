@@ -19,7 +19,7 @@
 
      2. Un petit texte propre à une page (titre de l'onglet, intro...) →
         directement dans la balise, avec data-en :
-          <h1 data-en="About">À propos</h1>
+          <h1 data-en="About me">À propos</h1>
 
      3. Un long texte (le corps d'un article) → un bloc par langue,
         côte à côte, chacun avec data-lang :
@@ -39,7 +39,7 @@ var TRADUCTIONS = {
   'nav.accueil':  { en: 'Home' },
   'nav.etudes':   { en: 'Case studies' },
   'nav.fiches':   { en: 'Fact sheets' },
-  'nav.apropos':  { en: 'About' },
+  'nav.apropos':  { en: 'About me' },
   'nav.aria':     { en: 'Main navigation' },
   'logo.alt':     { en: 'Popcorn & Capital logo' },
 
