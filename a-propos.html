@@ -17,7 +17,7 @@
        Elle demande à Google (et aux autres moteurs) de ne pas indexer la page. -->
   <meta name="robots" content="noindex, nofollow">
 
-  <title>À propos — Popcorn &amp; Capital</title>
+  <title data-en="About — Popcorn &amp; Capital">À propos — Popcorn &amp; Capital</title>
   <link rel="icon" type="image/svg+xml" href="logo.svg">
 
   <!-- POLICES : Bebas Neue (nom du site) + Playfair Display (titres) + Inter (textes) -->
@@ -43,36 +43,45 @@
        ====================================================================== -->
   <header class="relative px-5 pt-12 sm:pt-16">
 
+    <!-- CHOIX DE LA LANGUE (FR · EN) : rempli automatiquement par assets/site.js.
+         Le choix est mémorisé par le navigateur. Traductions : assets/traductions.js -->
+    <div id="choix-langue" class="absolute top-4 left-4 sm:top-6 sm:left-8"></div>
+
     <!-- BOUTON MODE CLAIR / SOMBRE (le choix est mémorisé par le navigateur) -->
     <button id="theme-toggle" type="button"
             class="absolute top-4 right-4 sm:top-6 sm:right-8 flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-muted hover:text-ink hover:border-ink/50 transition-colors"
-            aria-label="Basculer entre le mode clair et le mode sombre">
+            aria-label="Basculer entre le mode clair et le mode sombre" data-t-aria="theme.aria">
       <svg class="w-3.5 h-3.5 dark:hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
       <svg class="w-3.5 h-3.5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <span class="hidden sm:inline dark:sm:hidden">Mode sombre</span>
-      <span class="hidden dark:sm:inline">Mode clair</span>
+      <span class="hidden sm:inline dark:sm:hidden" data-t="theme.sombre">Mode sombre</span>
+      <span class="hidden dark:sm:inline" data-t="theme.clair">Mode clair</span>
     </button>
 
     <div class="text-center">
       <!-- LOGO, puis TITRE en dessous (police Bebas Neue, style affiche de cinéma) -->
       <a href="index.html" class="inline-flex flex-col items-center">
-        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" class="w-24 h-24 sm:w-28 sm:h-28 mb-4">
+        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" data-t-alt="logo.alt" class="w-24 h-24 sm:w-28 sm:h-28 mb-4">
         <span class="font-display uppercase tracking-[0.04em] whitespace-nowrap text-[clamp(2.25rem,11vw,4rem)] sm:text-8xl leading-none">Popcorn &amp; Capital</span>
       </a>
     </div>
 
-    <nav class="max-w-6xl mx-auto mt-8 border-t border-ink border-b" aria-label="Navigation principale">
+    <nav class="max-w-6xl mx-auto mt-8 border-t border-ink border-b" aria-label="Navigation principale" data-t-aria="nav.aria">
       <ul class="flex flex-wrap justify-center gap-x-8 sm:gap-x-14 gap-y-2 py-4 text-[11px] font-medium uppercase tracking-[0.22em]">
-        <li><a href="index.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Accueil</a></li>
-        <li><a href="etudes-de-cas.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Études de cas</a></li>
-        <li><a href="fiches-techniques.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Fiches techniques</a></li>
-        <li><a href="a-propos.html" aria-current="page" class="pb-1 border-b border-ink">À propos</a></li>
+        <li><a href="index.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors" data-t="nav.accueil">Accueil</a></li>
+        <li><a href="etudes-de-cas.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors" data-t="nav.etudes">Études de cas</a></li>
+        <li><a href="fiches-techniques.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors" data-t="nav.fiches">Fiches techniques</a></li>
+        <li><a href="a-propos.html" aria-current="page" class="pb-1 border-b border-ink" data-t="nav.apropos">À propos</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="px-5 py-14 sm:py-20">
-    <div class="max-w-2xl mx-auto">
+    <!-- ==================================================================
+         VERSION FRANÇAISE (data-lang="fr"). La version anglaise (en) suit plus bas :
+         si vous modifiez ce texte, pensez à la mettre à jour (ou supprimez-la :
+         la version française s'affichera alors à sa place).
+         ================================================================== -->
+    <div class="max-w-2xl mx-auto" data-lang="fr">
 
       <!-- TITRE DE LA PAGE -->
       <div class="text-center">
@@ -199,6 +208,215 @@
       </aside>
 
     </div>
+
+    <!-- ============================ ENGLISH VERSION ============================ -->
+    <div class="max-w-2xl mx-auto" data-lang="en">
+      <div class="text-center">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-muted">The notebook and its author</p>
+        <h1 class="mt-4 font-serif text-4xl sm:text-6xl leading-tight">About</h1>
+      </div>
+
+      <section class="mt-16 text-center">
+        <div class="w-36 h-36 rounded-full bg-cream mx-auto flex items-center justify-center">
+          <img src="logo.svg" alt="" class="w-16 h-16">
+        </div>
+
+        <h2 class="mt-8 font-serif text-3xl">Who’s behind the blog?</h2>
+
+        <div class="article-body sans-lettrine mt-6 text-left">
+          <p class="font-serif text-xl leading-relaxed">
+            Hi, my name is Ghita (it’s pronounced Rita).
+          </p>
+          <p>
+            I’m an econometrics student on a gap year after a first-year master’s (M1) at
+            Université Paris Cité, with a bachelor’s degree in Finance/Management from Paris 1
+            Panthéon-Sorbonne. I’m currently preparing to enter business school for a master’s
+            in finance. My path has taken me through audit, credit risk, market research and data
+            analysis, with the toolbox that goes with it: Power BI, R, Python, SQL and Excel.
+            I love numbers, but above all the ones that tell a story.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Power BI</span>
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">R</span>
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Python</span>
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">SQL</span>
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Excel</span>
+          </div>
+
+          <p><strong>And what really gets me going is cinema.</strong></p>
+          <p>
+            A film buff for a few years now, I went from a Sunday-night passion to a
+            full-blown obsession. But beyond what’s on screen, what interests me is what happens
+            behind the scenes: how a film gets financed, how a budget is structured, why some
+            projects pay off and others sink. Cinema, finance, consulting, data: to me, they all
+            speak the same language.
+          </p>
+          <p>
+            <strong>My goal:</strong> to work in the film industry as an analyst. To put my
+            skills in finance, consulting and data analysis to work for an industry I love:
+            project valuation, financing, market research, decision support. I want to understand
+            where the money goes, and why, in a world where people talk as much about creativity
+            as about numbers.
+          </p>
+
+          <h3>A prototype app as a bonus</h3>
+          <p>
+            On the side, I’m building a film discovery app: you swipe, you match, and it can
+            even get a group to agree in real time (goodbye to 45-minute debates). It’s still just
+            a prototype, but it’s my way of getting my hands dirty on the product side, from design
+            to data.
+          </p>
+          <p>
+            <a href="https://popcorned.lovable.app/" target="_blank" rel="noopener" class="bouton inline-flex items-center gap-2 border border-ink px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] hover:bg-ink hover:text-paper transition-colors">👉 Discover the app <span aria-hidden="true">→</span></a>
+          </p>
+
+          <p>
+            That’s it for the introduction. Make yourself comfortable, grab some popcorn, and welcome.
+          </p>
+        </div>
+      </section>
+
+      <hr class="my-16 border-ink/20">
+
+      <section>
+        <h2 class="text-center font-serif text-3xl sm:text-4xl leading-tight">
+          Follow the money, <em>frame by frame.</em>
+        </h2>
+
+        <div class="article-body sans-lettrine mt-8">
+          <p>
+            Behind every film that reaches cinemas, there is a financial structure as meticulous
+            as its editing: pre-sales, tax credits, public funding, international co-productions,
+            gap financing… This notebook is where I take those mechanisms apart.
+          </p>
+          <p>
+            I record my reading, my models, my hypotheses and my case studies here, with one
+            conviction: understanding how a film is financed means understanding why it exists.
+          </p>
+
+          <h3>What you’ll find here</h3>
+          <ul>
+            <li><a href="index.html">Home</a>: all the content, from newest to oldest (or the other way round).</li>
+            <li><a href="etudes-de-cas.html">Case studies</a>: real films, dissected.</li>
+            <li><a href="fiches-techniques.html">Fact sheets</a>: diagrams, summaries, definitions and explainers.</li>
+          </ul>
+        </div>
+
+        <p class="mt-10 text-center font-serif italic text-lg">Notebook opened on 1 October 2026</p>
+      </section>
+
+      <aside class="mt-16 bg-cream px-7 sm:px-10 py-8 text-center">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.3em]">A private notebook</p>
+        <div class="mx-auto mt-3 mb-5 w-10 border-t border-ink"></div>
+        <p class="text-[15px] leading-relaxed text-ink/80">
+          This site is a personal research notebook, not indexed by search engines.
+          Please do not share its address.
+        </p>
+      </aside>
+    </div>
+
+
+      <section class="mt-16 text-center">
+        <div class="w-36 h-36 rounded-full bg-cream mx-auto flex items-center justify-center">
+          <img src="logo.svg" alt="" class="w-16 h-16">
+        </div>
+
+        <h2 class="mt-8 font-serif text-3xl">Wer steckt hinter dem Blog?</h2>
+
+        <div class="article-body sans-lettrine mt-6 text-left">
+          <p class="font-serif text-xl leading-relaxed">
+            Hallo, ich heiße Ghita (ausgesprochen wie Rita).
+          </p>
+          <p>
+            Ich studiere Ökonometrie und mache gerade ein Gap Year nach dem ersten
+            Masterjahr (M1) an der Université Paris Cité; davor habe ich einen Bachelor in
+            Finanzen/Management an der Paris 1 Panthéon-Sorbonne abgeschlossen. Zurzeit bereite
+            ich mich auf eine Business School vor, für einen Master in Finance. Mein Weg führte
+            mich durch Wirtschaftsprüfung, Kreditrisiko, Marktforschung und Datenanalyse, mit dem
+            passenden Werkzeugkasten: Power BI, R, Python, SQL und Excel. Ich liebe Zahlen, aber
+            vor allem die, die eine Geschichte erzählen.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Power BI</span>
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">R</span>
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Python</span>
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">SQL</span>
+            <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Excel</span>
+          </div>
+
+          <p><strong>Und was mich wirklich begeistert, ist das Kino.</strong></p>
+          <p>
+            Seit ein paar Jahren bin ich Cineastin: Aus der Leidenschaft für den
+            Sonntagabendfilm ist längst eine handfeste Obsession geworden. Doch über das hinaus, was
+            auf der Leinwand passiert, interessiert mich vor allem, was hinter den Kulissen
+            geschieht: wie ein Film finanziert wird, wie man ein Budget strukturiert, warum manche
+            Projekte Geld einbringen und andere untergehen. Kino, Finanzen, Beratung, Daten: Für
+            mich sprechen sie alle dieselbe Sprache.
+          </p>
+          <p>
+            <strong>Mein Ziel:</strong> als Analystin in der Filmbranche zu arbeiten. Meine
+            Kenntnisse in Finanzen, Beratung und Datenanalyse in den Dienst einer Branche zu
+            stellen, die ich liebe: Projektbewertung, Finanzierung, Marktforschung,
+            Entscheidungsunterstützung. Ich will verstehen, wohin das Geld fließt und warum, in
+            einer Welt, in der genauso viel über Kreativität wie über Zahlen gesprochen wird.
+          </p>
+
+          <h3>Als Bonus: ein App-Prototyp</h3>
+          <p>
+            Nebenbei entwickle ich eine App, mit der man Filme entdecken kann: Du swipest, du
+            matchst, und sie kann sogar eine ganze Gruppe in Echtzeit auf einen Film einigen
+            (tschüss, 45-minütige Diskussionen). Noch ist es nur ein Prototyp, aber so packe ich
+            auf der Produktseite selbst mit an, vom Konzept bis zu den Daten.
+          </p>
+          <p>
+            <a href="https://popcorned.lovable.app/" target="_blank" rel="noopener" class="bouton inline-flex items-center gap-2 border border-ink px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] hover:bg-ink hover:text-paper transition-colors">👉 Die App entdecken <span aria-hidden="true">→</span></a>
+          </p>
+
+          <p>
+            So viel zur Vorstellung. Mach es dir bequem, schnapp dir Popcorn, und herzlich willkommen.
+          </p>
+        </div>
+      </section>
+
+      <hr class="my-16 border-ink/20">
+
+      <section>
+        <h2 class="text-center font-serif text-3xl sm:text-4xl leading-tight">
+          Dem Geld folgen, <em>Bild für Bild.</em>
+        </h2>
+
+        <div class="article-body sans-lettrine mt-8">
+          <p>
+            Hinter jedem Film, der ins Kino kommt, steckt eine Finanzierung, die so akribisch
+            montiert ist wie der Film selbst: Pre-Sales, Steuergutschriften, öffentliche
+            Förderung, internationale Koproduktionen, Gap Financing … In diesem Notizbuch nehme ich
+            diese Mechanismen auseinander.
+          </p>
+          <p>
+            Hier halte ich meine Lektüren, Modelle, Hypothesen und Fallstudien fest, mit einer
+            Überzeugung: Wer versteht, wie ein Film finanziert wird, versteht, warum es ihn gibt.
+          </p>
+
+          <h3>Was du hier findest</h3>
+          <ul>
+            <li><a href="index.html">Die Startseite</a>: alle Inhalte, von den neuesten zu den ältesten (oder umgekehrt).</li>
+            <li><a href="etudes-de-cas.html">Die Fallstudien</a>: echte Filme, seziert.</li>
+            <li><a href="fiches-techniques.html">Die Factsheets</a>: Schemata, Zusammenfassungen, Definitionen und Erklärungen.</li>
+          </ul>
+        </div>
+
+        <p class="mt-10 text-center font-serif italic text-lg">Notizbuch eröffnet am 1. Oktober 2026</p>
+      </section>
+
+      <aside class="mt-16 bg-cream px-7 sm:px-10 py-8 text-center">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.3em]">Ein privates Notizbuch</p>
+        <div class="mx-auto mt-3 mb-5 w-10 border-t border-ink"></div>
+        <p class="text-[15px] leading-relaxed text-ink/80">
+          Diese Website ist ein persönliches Forschungsnotizbuch und wird von Suchmaschinen nicht
+          indexiert. Bitte gib ihre Adresse nicht weiter.
+        </p>
+      </aside>
+    </div>
   </main>
 
   <!-- ======================================================================
@@ -211,12 +429,13 @@
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
         </svg>
-        Carnet de recherche privé · Ne pas partager
+        <span data-t="pied.prive">Carnet de recherche privé · Ne pas partager</span>
       </p>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT : bouton mode clair / sombre -->
+  <!-- JAVASCRIPT : traductions, puis langue et bouton mode clair / sombre -->
+  <script src="assets/traductions.js"></script>
   <script src="assets/site.js"></script>
 </body>
 </html>

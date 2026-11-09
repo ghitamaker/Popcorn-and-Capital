@@ -12,7 +12,7 @@
        Elle demande à Google (et aux autres moteurs) de ne pas indexer la page. -->
   <meta name="robots" content="noindex, nofollow">
 
-  <title>Les Sofica · Popcorn &amp; Capital</title>
+  <title data-en="Sofica · Popcorn &amp; Capital">Les Sofica · Popcorn &amp; Capital</title>
   <link rel="icon" type="image/svg+xml" href="logo.svg">
 
   <!-- POLICES : Bebas Neue (nom du site) + Playfair Display (titres) + Inter (textes) -->
@@ -38,30 +38,34 @@
        ====================================================================== -->
   <header class="relative px-5 pt-10 sm:pt-12">
 
+    <!-- CHOIX DE LA LANGUE (FR · EN) : rempli automatiquement par assets/site.js.
+         Le choix est mémorisé par le navigateur. Traductions : assets/traductions.js -->
+    <div id="choix-langue" class="absolute top-4 left-4 sm:top-6 sm:left-8"></div>
+
     <!-- BOUTON MODE CLAIR / SOMBRE (le choix est mémorisé par le navigateur) -->
     <button id="theme-toggle" type="button"
             class="absolute top-4 right-4 sm:top-6 sm:right-8 flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-muted hover:text-ink hover:border-ink/50 transition-colors"
-            aria-label="Basculer entre le mode clair et le mode sombre">
+            aria-label="Basculer entre le mode clair et le mode sombre" data-t-aria="theme.aria">
       <svg class="w-3.5 h-3.5 dark:hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
       <svg class="w-3.5 h-3.5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <span class="hidden sm:inline dark:sm:hidden">Mode sombre</span>
-      <span class="hidden dark:sm:inline">Mode clair</span>
+      <span class="hidden sm:inline dark:sm:hidden" data-t="theme.sombre">Mode sombre</span>
+      <span class="hidden dark:sm:inline" data-t="theme.clair">Mode clair</span>
     </button>
 
     <div class="text-center">
       <!-- LOGO, puis TITRE en dessous (police Bebas Neue, style affiche de cinéma) -->
       <a href="index.html" class="inline-flex flex-col items-center">
-        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" class="w-16 h-16 mb-3">
+        <img src="logo.svg" alt="Logo Popcorn &amp; Capital" data-t-alt="logo.alt" class="w-16 h-16 mb-3">
         <span class="font-display uppercase tracking-[0.04em] whitespace-nowrap text-[clamp(2rem,10vw,3rem)] sm:text-6xl leading-none">Popcorn &amp; Capital</span>
       </a>
     </div>
 
-    <nav class="max-w-6xl mx-auto mt-8 border-t border-ink border-b" aria-label="Navigation principale">
+    <nav class="max-w-6xl mx-auto mt-8 border-t border-ink border-b" aria-label="Navigation principale" data-t-aria="nav.aria">
       <ul class="flex flex-wrap justify-center gap-x-8 sm:gap-x-14 gap-y-2 py-4 text-[11px] font-medium uppercase tracking-[0.22em]">
-        <li><a href="index.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Accueil</a></li>
-        <li><a href="etudes-de-cas.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">Études de cas</a></li>
-        <li><a href="fiches-techniques.html" aria-current="page" class="pb-1 border-b border-ink">Fiches techniques</a></li>
-        <li><a href="a-propos.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors">À propos</a></li>
+        <li><a href="index.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors" data-t="nav.accueil">Accueil</a></li>
+        <li><a href="etudes-de-cas.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors" data-t="nav.etudes">Études de cas</a></li>
+        <li><a href="fiches-techniques.html" aria-current="page" class="pb-1 border-b border-ink" data-t="nav.fiches">Fiches techniques</a></li>
+        <li><a href="a-propos.html" class="pb-1 border-b border-transparent hover:border-ink transition-colors" data-t="nav.apropos">À propos</a></li>
       </ul>
     </nav>
   </header>
@@ -76,7 +80,10 @@
          - Explication → blocs "EN UNE PHRASE" + "L'EXPLICATION"
        ====================================================================== -->
   <main class="px-5 py-14 sm:py-20">
-    <article class="max-w-2xl mx-auto">
+    <!-- VERSION FRANÇAISE (data-lang="fr"). La version anglaise suit juste après :
+         pensez à la mettre à jour si vous modifiez ce texte (ou supprimez-la :
+         le français s'affichera à sa place). -->
+    <article class="max-w-2xl mx-auto" data-lang="fr">
 
       <a href="fiches-techniques.html" class="text-[11px] font-medium uppercase tracking-[0.25em] border-b border-ink pb-1 hover:text-muted transition-colors">
         ← Toutes les fiches
@@ -319,6 +326,243 @@
         </a>
       </p>
     </article>
+
+    <!-- ============================ ENGLISH VERSION ============================ -->
+    <article class="max-w-2xl mx-auto" data-lang="en">
+
+      <a href="fiches-techniques.html" class="text-[11px] font-medium uppercase tracking-[0.25em] border-b border-ink pb-1 hover:text-muted transition-colors">
+        ← All fact sheets
+      </a>
+
+      <header class="mt-12 text-center">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em]">
+          Fact sheet <span class="mx-1.5 text-muted">·</span> Explainer
+        </p>
+
+        <h1 class="mt-6 font-serif text-4xl sm:text-5xl leading-[1.1]">
+          Sofica: when private individuals fund French cinema
+        </h1>
+
+        <p class="mt-6 text-[11px] uppercase tracking-[0.25em] text-muted">
+          <time datetime="2026-10-24">24 October 2026</time>
+          <span class="mx-2">·</span> 6 min read
+        </p>
+
+        <div class="mt-6 flex flex-wrap justify-center gap-2">
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Sofica</span>
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Tax reduction</span>
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">Independent production</span>
+          <span class="border border-ink px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em]">CNC</span>
+        </div>
+      </header>
+
+      <aside class="mt-12 bg-cream px-7 sm:px-10 py-8 text-center">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.3em]">In one sentence</p>
+        <div class="mx-auto mt-3 mb-5 w-10 border-t border-ink"></div>
+        <p class="font-serif text-xl leading-relaxed">
+          A Sofica raises money from private individuals to fund French films and series, and the
+          State thanks them with a tax reduction of 30 to 48%* of their stake.
+        </p>
+      </aside>
+
+      <div class="article-body sans-lettrine mt-14">
+
+        <p>
+          While preparing this article, I came across a fact that made me smile:
+          <em>Anatomy of a Fall</em>, Justine Triet’s 2023 Palme d’Or winner, was partly funded by
+          private individuals. People like you and me (well, with a bit more savings than me), who
+          bought shares in a Sofica called Cinécap&nbsp;5. It is managed by Cinécapital, the film
+          subsidiary of BNP Paribas.
+        </p>
+
+        <p>
+          Why did they do it? I won’t lie to you, the tax reduction has a lot to do with it. But I
+          don’t think it’s the only reason. Locking up your money for five years without being sure
+          you’ll see it again still takes wanting these films to exist.
+        </p>
+
+        <p>
+          I understand that all the better because, personally, I invest in cinema because it’s an
+          industry I believe in.
+        </p>
+
+        <p>
+          If you’ve read <a href="resident-evil-constantin-film.html">my article on Resident Evil</a>,
+          this will remind you of the German Medienfonds. Same starting idea, except that the French
+          version is much more tightly regulated, and it still exists.
+        </p>
+
+        <h2>The diagram</h2>
+
+        <div class="schema">
+          <div class="etape"><strong>Individual</strong>buys shares and pays less tax</div>
+          <div class="fleche">→</div>
+          <div class="etape"><strong>Sofica</strong>picks the projects and invests the money</div>
+          <div class="fleche">→</div>
+          <div class="etape"><strong>Producer</strong>receives the money before the shoot</div>
+          <div class="fleche">→</div>
+          <div class="etape"><strong>Revenue</strong>flows back to the Sofica, then to the shareholders</div>
+        </div>
+
+        <p>A simplified version, obviously. Each film negotiates its own revenue-sharing rules.</p>
+
+        <h2>How it works</h2>
+
+        <h3>Who does what</h3>
+
+        <p>
+          <a href="#mot-sofica-en">Sofica</a> is the (rather long, I warn you) abbreviation of
+          <em>Société pour le financement de l’industrie cinématographique et audiovisuelle</em>,
+          a company for financing the film and audiovisual industry. It has existed since 1985.
+          Each year, only about ten of them receive <a href="#mot-agrement-en">approval</a> from the
+          Ministry of the Economy, after consulting the <a href="#mot-cnc-en">CNC</a>. Behind every
+          Sofica there is a <a href="#mot-gestion-en">management company</a>. Cinécapital, for
+          example, has launched several over the years, all named Cinécap.
+        </p>
+
+        <p>
+          The way it works is fairly simple. You buy shares at the end of the year, during the
+          subscription period. The Sofica then invests that money in films and series, most of the
+          time through <a href="#mot-association-en">production association contracts</a>.
+          In practice, it puts money on the table before the shoot and, in return, gets a share
+          of the revenue if the film succeeds.
+        </p>
+
+        <p>
+          What I like about the scheme is that part of the funds must go to
+          <a href="#mot-independante-en">independent production</a>, meaning producers who don’t
+          depend on a TV channel. They are often the ones who struggle the most to close a budget.
+        </p>
+
+        <p>
+          One important detail: a Sofica is not a bank. Institutions like Cofiloisirs, which also
+          belongs to BNP Paribas, lend money to producers, and the producers pay them back. A
+          Sofica takes a real risk. If the film earns nothing, it gets nothing back.
+        </p>
+
+        <h3>What the investor gets out of it</h3>
+
+        <p>
+          On the tax side, the <a href="#mot-reduction-en">reduction</a> is 30%* of what you invest.
+          It rises to 36%* if the Sofica puts at least 10% of its funds into the capital of
+          production companies, and up to 48%* if it also makes certain commitments set out in the
+          law (on series or exports, for example).
+        </p>
+
+        <p>
+          Of course, there are limits. You can’t invest more than 25% of your total net income, nor
+          more than €18,000 a year*. At the maximum rate, that’s at best €8,640 less tax. And you
+          commit to keeping your shares until 31&nbsp;December of the fifth year after you
+          subscribe, with no guarantee of getting your capital back.
+        </p>
+
+        <p>
+          Two traps to know before diving in. First, it’s a tax reduction, not a tax credit. If you
+          pay less tax than the amount of the reduction, the rest is lost. Second, for now, the
+          scheme runs until 31&nbsp;December 2026*. We’ll have to see whether the next finance law
+          extends it.
+        </p>
+
+        <p class="text-sm text-muted">* According to the sources listed at the bottom of the page. Double-check on impots.gouv.fr before investing, as the rules can change from one finance law to the next.</p>
+
+        <h3>A worked example</h3>
+
+        <p>
+          Let’s take an example, it’s clearer. You invest €5,000 in a Sofica at 48%. Your tax
+          goes down by €2,400. Your real outlay is therefore only €2,600.
+        </p>
+
+        <div class="tableau">
+          <table>
+            <thead>
+              <tr><th>Scenario</th><th>Recovered at liquidation</th><th>Real outlay</th><th>Result</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>The films do well</td><td>70% of the stake, i.e. €3,500</td><td>€2,600</td><td>+&nbsp;€900</td></tr>
+              <tr><td>The films do badly</td><td>40% of the stake, i.e. €2,000</td><td>€2,600</td><td>−&nbsp;€600</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          I insist, these two scenarios are made up for the example. What they show is that the
+          tax reduction does most of the work on returns, and the films do the rest. At
+          <a href="#mot-liquidation-en">liquidation</a>, getting back less than your initial stake
+          happens often.
+        </p>
+
+        <h2>Myth: “French cinema lives off our taxes”</h2>
+
+        <p>
+          It’s something you hear a lot, especially when a French film flops. It is largely false.
+        </p>
+
+        <p>
+          More than 90% of <a href="#mot-cnc-en">CNC</a> funding comes from three
+          <a href="#mot-taxe-affectee-en">earmarked taxes</a>. The first is levied on every cinema
+          ticket, the second on TV channels, the third on video and streaming platforms. This
+          money doesn’t go through the State’s general budget; it goes straight to film and
+          audiovisual production. Basically, it’s cinemas, channels and platforms that fund
+          tomorrow’s films. Your income tax has nothing to do with it.
+        </p>
+
+        <p>
+          To be fair, I’ll add some nuance. Sofica, like tax credits for shooting in France, do
+          cost the State something. These are <a href="#mot-depense-fiscale-en">tax expenditures</a>:
+          the State agrees to collect a little less to support the sector. Nobody dips into your
+          taxes to pay for a film, but the State does make a gesture.
+        </p>
+
+        <h2>Definitions</h2>
+
+        <dl>
+          <div id="mot-sofica-en"><dt>Sofica</dt><dd>A company for financing the film and audiovisual industry. It raises money from private individuals and invests it in films and series.</dd></div>
+          <div id="mot-agrement-en"><dt>Approval</dt><dd>Authorisation granted each year by the State. Without it, a Sofica can neither raise money nor offer the tax reduction.</dd></div>
+          <div id="mot-cnc-en"><dt>CNC</dt><dd>Centre national du cinéma et de l’image animée, France’s national film board. It supports and regulates French cinema, and gives its opinion on Sofica.</dd></div>
+          <div id="mot-association-en"><dt>Production association contract</dt><dd>An agreement under which the Sofica finances a film before the shoot in exchange for a share of its future revenue.</dd></div>
+          <div id="mot-independante-en"><dt>Independent production</dt><dd>Films produced by companies that are not controlled by a television channel.</dd></div>
+          <div id="mot-gestion-en"><dt>Management company</dt><dd>The company that creates a Sofica, picks the films it invests in and manages the money until liquidation.</dd></div>
+          <div id="mot-taxe-affectee-en"><dt>Earmarked tax</dt><dd>A tax whose proceeds go directly to a specific body, here the CNC, instead of joining the State’s general budget.</dd></div>
+          <div id="mot-depense-fiscale-en"><dt>Tax expenditure</dt><dd>Money the State chooses not to collect (tax reduction or credit) to encourage an activity.</dd></div>
+          <div id="mot-reduction-en"><dt>Tax reduction</dt><dd>An amount deducted directly from your tax bill. Here, a percentage of what you invest. Unlike a tax credit, it is never refunded if your tax is too low.</dd></div>
+          <div id="mot-liquidation-en"><dt>Liquidation</dt><dd>The end of the Sofica’s life, after several years: it sells its rights in the films and returns what is left to the shareholders.</dd></div>
+        </dl>
+
+        <h2>Key takeaways</h2>
+
+        <ul>
+          <li>A Sofica lets private individuals fund French cinema, with a tax reduction in return.</li>
+          <li>The reduction ranges from 30 to 48%* of the stake, up to €18,000 a year*.</li>
+          <li>The money is locked up for at least five years and the capital is not guaranteed.</li>
+          <li>Films like <em>Anatomy of a Fall</em> were partly financed thanks to them.</li>
+          <li>Places are limited: subscription opens at the end of the year and often fills up fast.</li>
+          <li>The CNC is mainly funded by taxes paid by cinemas, channels and platforms, not by income tax.</li>
+        </ul>
+      </div>
+
+      <section class="mt-16 border-t border-ink pt-6 text-sm text-muted space-y-2">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-ink mb-3">Further reading</p>
+        <p>→ <a href="resident-evil-constantin-film.html" class="underline underline-offset-4">Resident Evil and Constantin Film</a>: the Medienfonds, the German equivalent of Sofica.</p>
+        <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-ink mt-6 mb-3">Sources (in French)</p>
+        <ul class="space-y-1.5">
+          <li><a href="https://mesaidespubliques.infogreffe.fr/aides/reduction-impot-sur-revenu-sofica-souscription-cinema-ou-audiovisuel" target="_blank" rel="noopener" class="underline underline-offset-4">Infogreffe, Mes aides publiques: Sofica tax reduction</a></li>
+          <li><a href="https://www.weblex.fr/articles/tout-savoir-sur-la-reduction-d-impot-pour-souscription-au-capital-de-sofica" target="_blank" rel="noopener" class="underline underline-offset-4">WebLex: everything about the Sofica tax reduction</a></li>
+          <li><a href="https://www.moneyvox.fr/bourse/Sofica.php" target="_blank" rel="noopener" class="underline underline-offset-4">Moneyvox: Sofica</a></li>
+          <li><a href="https://www.cnc.fr/cinema/actualites/les-sofica-40-ans-au-service-de-la-creation_2480590" target="_blank" rel="noopener" class="underline underline-offset-4">CNC: Sofica, 40 years serving creation</a></li>
+          <li><a href="https://group.bnpparibas/actualite/bnp-paribas-premier-financier-et-partenaire-du-cinema-en-europe" target="_blank" rel="noopener" class="underline underline-offset-4">BNP Paribas: leading financier and partner of cinema in Europe</a> (Cinécap&nbsp;5 and <em>Anatomy of a Fall</em>)</li>
+          <li><a href="https://group.bnpparibas/actualite/cinema-acteurs-financement-long-metrage" target="_blank" rel="noopener" class="underline underline-offset-4">BNP Paribas: the players in feature film financing</a> (Cinécapital, Cofiloisirs)</li>
+          <li><a href="https://www.senat.fr/rap/l21-163-319/l21-163-3197.html" target="_blank" rel="noopener" class="underline underline-offset-4">French Senate: film financing and the challenge of recovery</a> (taxes earmarked for the CNC)</li>
+          <li>For the official rules: form 2042 RICI and BOFiP (BOI-IR-RICI-180-20) on impots.gouv.fr.</li>
+        </ul>
+      </section>
+
+      <p class="mt-14 text-center">
+        <a href="index.html" class="text-[11px] font-medium uppercase tracking-[0.25em] border-b border-ink pb-1 hover:text-muted transition-colors">
+          ← Back to the notebook
+        </a>
+      </p>
+    </article>
+
   </main>
 
   <!-- ======================================================================
@@ -331,12 +575,13 @@
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
         </svg>
-        Carnet de recherche privé · Ne pas partager
+        <span data-t="pied.prive">Carnet de recherche privé · Ne pas partager</span>
       </p>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT : bouton mode clair / sombre -->
+  <!-- JAVASCRIPT : traductions, puis langue et bouton mode clair / sombre -->
+  <script src="assets/traductions.js"></script>
   <script src="assets/site.js"></script>
 </body>
 </html>

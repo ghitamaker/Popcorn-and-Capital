@@ -17,14 +17,18 @@
                     "etude-de-cas"     → Accueil + onglet Études de cas
                     "fiche-technique"  → Accueil + onglet Fiches techniques
         titre     : le titre affiché sous l'image
+        titre_en  : (facultatif) le titre traduit en anglais. S'il manque,
+                    le titre français s'affiche aussi en anglais.
         date      : au format "AAAA-MM-JJ" (ex : "2026-10-01" = 1er octobre 2026)
         lien      : le nom du fichier de la page (ex : "etude-a24.html")
         image     : l'image de la carte, rangée dans le dossier images/
                     (ex : "images/ma-photo.jpg"), idéalement au format paysage
         etiquette : (facultatif) le petit texte posé sur l'image.
                     Si vous l'omettez, le type s'affiche à la place.
+                    (Traduction anglaise possible : etiquette_en.)
         genre     : (fiches techniques uniquement) "Schéma", "Résumé",
                     "Définition" ou "Explication" — sert de filtre dans l'onglet.
+                    Toujours en français : il est traduit automatiquement.
         bientot   : true → contenu annoncé mais pas encore écrit : la carte
                     affiche « Bientôt disponible », n'est pas cliquable et se
                     range après les contenus publiés. Pas besoin de lien ni de date.
@@ -43,6 +47,7 @@ var CONTENUS = [
     type: "fiche-technique",
     genre: "Explication",
     titre: "Les Sofica : quand des particuliers financent le cinéma français",
+    titre_en: "Sofica: when private individuals fund French cinema",
     date: "2026-10-24",
     lien: "sofica.html",
     image: "images/ingenierie-financiere.svg",
@@ -51,6 +56,7 @@ var CONTENUS = [
   {
     type: "etude-de-cas",
     titre: "Resident Evil et Constantin Film",
+    titre_en: "Resident Evil and Constantin Film",
     date: "2026-10-01",
     lien: "resident-evil-constantin-film.html",
     image: "images/resident-evil.svg",
@@ -62,6 +68,7 @@ var CONTENUS = [
   {
     type: "etude-de-cas",
     titre: "A24 : le petit studio qui a fait de l'indé une marque",
+    titre_en: "A24: the small studio that turned indie into a brand",
     image: "images/etudes-de-cas.svg",
     bientot: true,
   },
@@ -69,6 +76,7 @@ var CONTENUS = [
   {
     type: "etude-de-cas",
     titre: "Obsession et Blumhouse : la peur à petit budget, une machine à cash",
+    titre_en: "Obsession and Blumhouse: low-budget fear, a cash machine",
     image: "images/blumhouse.svg",
     bientot: true,
   },
@@ -76,6 +84,7 @@ var CONTENUS = [
   {
     type: "article",
     titre: "Ton ticket de ciné : qui empoche vraiment l'argent ?",
+    titre_en: "Your cinema ticket: who really pockets the money?",
     image: "images/ticket.svg",
     bientot: true,
   },
@@ -83,6 +92,7 @@ var CONTENUS = [
   {
     type: "article",
     titre: "Box-office : pourquoi un carton peut quand même perdre de l'argent",
+    titre_en: "Box office: why a hit can still lose money",
     image: "images/data-strategie.svg",
     bientot: true,
   },
@@ -91,6 +101,7 @@ var CONTENUS = [
     type: "fiche-technique",
     genre: "Définition",
     titre: "Gap financing : combler le dernier trou du budget",
+    titre_en: "Gap financing: filling the last hole in the budget",
     image: "images/popcorn.svg",
     bientot: true,
   },
@@ -98,6 +109,7 @@ var CONTENUS = [
   {
     type: "article",
     titre: "Préventes : vendre un film avant qu'il existe",
+    titre_en: "Pre-sales: selling a film before it exists",
     image: "images/camera.svg",
     bientot: true,
   },
